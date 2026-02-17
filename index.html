@@ -12,6 +12,10 @@
 <body>
     <strong>Dit is een schoolproject</strong>
 
+    <header>
+        <img src="images/NS-logo-geel.png">
+    </header>
+
     <h1>Erfbelasting formulier</h1>
 
     <section>
@@ -24,34 +28,31 @@
                 <fieldset class="form-group">
                     <label for="voorlettersOverledene">
                     </label>
-                    <input type="text" id="voorlettersOverledene" name="voorlettersOverledene" placeholder="Voorletter(s)">
+                    <input type="text" id="voorlettersOverledene" name="voorlettersOverledene"
+                        placeholder="Voorletter(s)" required>
 
                     <label for="tussenvoegselOverledene">
                     </label>
-                    <input type="text" id="tussenvoegselOverledene" name="tussenvoegselOverledene" placeholder="Tussenvoegsel(s)">
+                    <input type="text" id="tussenvoegselOverledene" name="tussenvoegselOverledene"
+                        placeholder="Tussenvoegsel(s)">
 
                     <label for="achternaamOverledene">
                     </label>
-                    <input type="text" id="achternaamOverledene" name="achternaamOverledene" placeholder="Achternaam">
+                    <input type="text" id="achternaamOverledene" name="achternaamOverledene" placeholder="Achternaam" required>
                 </fieldset>
 
                 <fieldset class="form-group">
                     <label for="BSNoverledende">
                         BSN overledene
                     </label>
-                    <input 
-                    type="number" 
-                    id="BSNoverledende" 
-                    name="BSNoverledende" 
-                    pattern="[0-9]{9}" 
-                    required>
+                    <input type="text" id="BSNoverledende" name="BSNoverledende" pattern="[0-9]{9}" required>
                 </fieldset>
 
                 <fieldset class="form-group">
                     <label for="overlijd">
                         Overlijdensdatum
                     </label>
-                    <input type="date" id="overlijd" name="overlijd" max="2025-02-17">
+                    <input type="date" id="overlijd" name="overlijd" min="2026-01-01" max="2026-02-17" required>
                 </fieldset>
 
             </fieldset>
@@ -177,25 +178,27 @@
                     </label>
                 </fieldset>
 
-                <fieldset class="conditional-fields">
+                <fieldset class="conditional-fields" name="Persoongegevens Notaris">
                     <label>
                         Protocolnummer Notaris
                         <input type="number" name="protocolNummerNotaris">
                     </label>
 
                     <fieldset class="form-group">
-                    <label for="voorlettesNotaris">
-                    </label>
-                    <input type="text" id="voorlettersNotaris" name="voorlettersOverledene" placeholder="Voorletter(s)">
+                        <label for="voorlettesNotaris">
+                        </label>
+                        <input type="text" id="voorlettersNotaris" name="voorlettersOverledene"
+                            placeholder="Voorletter(s)">
 
-                    <label for="tussenvoegselNotaris">
-                    </label>
-                    <input type="text" id="tussenvoegselNotaris" name="tussenvoegselNotaris" placeholder="Tussenvoegsel(s)">
+                        <label for="tussenvoegselNotaris">
+                        </label>
+                        <input type="text" id="tussenvoegselNotaris" name="tussenvoegselNotaris"
+                            placeholder="Tussenvoegsel(s)">
 
-                    <label for="achternaamNotaris">
-                    </label>
-                    <input type="text" id="achternaamNotaris" name="achternaamNotaris" placeholder="Achternaam">
-                </fieldset>
+                        <label for="achternaamNotaris">
+                        </label>
+                        <input type="text" id="achternaamNotaris" name="achternaamNotaris" placeholder="Achternaam">
+                    </fieldset>
 
                     <label>
                         Vestigingsplaats
@@ -221,7 +224,7 @@
                 <legend>Identificatie gemachtigde</legend>
 
                 <p><em>Vul 1 van de 3 in: het BSN of RSIN van de gemachtigde, het beconnummer van de adviseur of het
-                protocolnummer van de notaris.</em>
+                        protocolnummer van de notaris.</em>
                 </p>
 
                 <fieldset class="form-group">
@@ -258,7 +261,8 @@
 
                     <label for="tussenvoegselGemachtigde">
                     </label>
-                    <input type="text" id="tussenvoegselGemachtigde" name="tussenvoegselGemachtigde" placeholder="Tussenvoegsel(s)">
+                    <input type="text" id="tussenvoegselGemachtigde" name="tussenvoegselGemachtigde"
+                        placeholder="Tussenvoegsel(s)">
 
                     <label for="achternaamGemachtigde">
                     </label>
@@ -279,7 +283,8 @@
                     <input type="text" id="straatGemachtigdeNL" name="straatGemachtigdeNL">
 
                     <label for="huisnummerGemachtigdeNL">Huisnummer</label>
-                    <input type="text" id="huisnummerGemachtigdeNL" name="huisnummerGemachtigdeNL">
+                    <input type="text" id="huisnummerGemachtigdeNL" name="huisnummerGemachtigdeNL" pattern="[0-9]{4}"
+                        required>
 
                     <label for="toevoegingGemachtigdeNL">Toevoeging</label>
                     <input type="text" id="toevoegingGemachtigdeNL" name="toevoegingGemachtigdeNL">
@@ -313,13 +318,28 @@
 
                 <fieldset class="form-group">
                     <label for="landcodeGemachtigde">Landcode</label>
-                    <input type="number" id="landcodeGemachtigde" name="landcodeGemachtigde">
-                    <small>In onderdeel C van de toelichting vindt u een lijst met landcodes.</small>
+                    <input type="text" id="landcodeGemachtigde" name="landcodeGemachtigde" list="landcodes">
+
+
+                    <datalist id="landcodes">
+                        <option value="ALB">Albanie</option>
+                        <option value="ARM">Armenie</option>
+                        <option value="BEL">Belgie</option>
+                        <option value="CYP">Cyprus</option>
+                        <option value="DNK">Denemarken</option>
+                    </datalist>
+
+                    <details>
+                        <summary>Toelichting landcode</summary>
+                        Bij de aangifte erfbelasting (en schenkbelasting) vraagt de Belastingdienst om een landcode om
+                        aan te geven waar bezittingen, schulden of erfgenamen zich bevinden. Deze code bestaat altijd
+                        uit 3 letters. Voor Nederland is de code 'NLD'
+                    </details>
                 </fieldset>
 
                 <fieldset class="form-group">
                     <label for="telefoonnummerGemachtigde">Telefoonnummer</label>
-                    <input type="number" id="telefoonnummerGemachtigde" name="telefoonnummerGemachtigde">
+                    <input type="tel" id="telefoonnummerGemachtigde" name="telefoonnummerGemachtigde">
                 </fieldset>
 
                 <fieldset class="form-group">
@@ -333,5 +353,6 @@
         </form>
     </section>
 </body>
+<script src="script.js"></script>
 
 </html>
