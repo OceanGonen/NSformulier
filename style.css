@@ -1,0 +1,146 @@
+:root {
+    --ns-font-color: rgb(42, 42, 109);
+
+    --ns-blue: #003082;
+    --ns-yellow: #FFC917;
+    --light-grey: #eef2f6;
+    --border-grey: #d8dee6;
+}
+
+input:user-invalid{
+    background-color: rgb(242, 141, 141);
+    color: red;
+}
+
+body {
+    font-family: system-ui, -apple-system, sans-serif;
+    background-color: var(--light-grey);
+    color: var(--ns-blue);
+    margin: 0;
+}
+
+section {
+    padding: 1.5rem;
+}
+
+fieldset {
+    background: white;
+    border: 1px solid var(--border-grey);
+    border-radius: 14px;
+    padding: 1.2rem;
+    margin-bottom: 1.5rem;
+}
+legend {
+    font-weight: 600;
+    font-size: 1rem;
+    padding: 0 0.3rem;
+    color: var(--ns-blue);
+}
+input {
+    width: 90%;
+    padding: 0.9rem;
+    border-radius: 10px;
+    border: 1px solid var(--border-grey);
+    font-size: 1rem;
+    margin-bottom: 1rem;
+    transition: all 0.2s ease;
+}
+
+input:focus {
+    outline: none;
+    border-color: var(--ns-blue);
+    box-shadow: 0 0 0 3px rgba(0, 48, 130, 0.15);
+}
+.radio-group label {
+    display: block;
+    padding: 1rem;
+    border-radius: 12px;
+    border: 1px solid var(--border-grey);
+    margin-bottom: 0.8rem;
+    background: white;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.radio-group input[type="radio"] {
+    display: none;
+}
+
+.radio-group label:hover {
+    border-color: var(--ns-blue);
+}
+
+.radio-group label:has(input:checked) {
+    border: 2px solid var(--ns-blue);
+    background: rgba(0, 48, 130, 0.15);
+}
+fieldset > fieldset {
+    border: none;
+    padding: 0;
+    margin-bottom: 1rem;
+}
+h1 {
+    font-size: 1.6rem;
+}
+
+h2 {
+    font-size: 1.2rem;
+    margin-top: 2.5rem;
+    margin-bottom: 1rem;
+    border-left: 4px solid var(--ns-yellow);
+    padding-left: 0.8rem;
+}
+em {
+    color: #5c6b7a;
+    font-size: 0.9rem;
+    display: block;
+    margin-bottom: 1rem;
+}
+
+legend {
+    font-weight: 800;
+    padding: 0.5rem;
+    border-radius: 4px;
+}
+
+.question{
+    font-weight: 400;
+}
+
+
+
+fieldset[name="Partner overledende"]:has(
+    input[name="heeftPartner"][value="Nee"]:checked
+)
+> fieldset:not(:first-of-type) {
+    opacity: 0.4;
+    pointer-events: none;
+}
+
+fieldset[name="Nabestaanden"]:has(
+    input[name="heeftKinderen"][value="Nee"]:checked
+)
+> fieldset:not(:first-of-type) {
+    opacity: 0.4;
+    pointer-events: none;
+}
+
+fieldset[name="Nabestaanden"]:has(
+    input[name="heeftKinderen"][value="Ja"]:checked
+):has(
+    input[name="isKindEerderOverleden"][value="Nee"]:checked
+)
+> fieldset:nth-of-type(3) {
+    opacity: 0.4;
+    pointer-events: none;
+}
+
+
+fieldset[name="Testament gegevens"]:has(
+    input[name="heeftTestament"][value="Nee"]:checked
+)
+> fieldset:not(:first-of-type) {
+    opacity: 0.4;
+    pointer-events: none;
+}
+
