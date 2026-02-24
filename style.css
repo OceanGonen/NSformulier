@@ -7,9 +7,24 @@
     --border-grey: #d8dee6;
 }
 
-input:user-invalid{
-    background-color: rgb(238, 161, 161);
-    border: red solid 1px;
+/* *,*::before, *::after {
+    box-sizing: border-box;
+} */
+
+input,
+button,
+select {
+    margin: 0;
+}
+
+input:user-invalid {
+    background-color: rgba(238, 161, 161, 0.2);
+    border: rgb(255, 89, 89) solid 1px;
+}
+
+input:not(:required) {
+    border: 1px solid var(--border-grey);
+    background-color: white;
 }
 
 body {
@@ -17,12 +32,15 @@ body {
     background-color: var(--light-grey);
     color: var(--ns-blue);
     margin: 0;
+
 }
 
-header{
+
+header {
     background-color: var(--ns-yellow);
 }
-header > img {
+
+header>img {
     height: 50px;
     margin: 10px 20px;
 }
@@ -37,7 +55,7 @@ section {
     padding: 1.5rem;
 }
 
-form > fieldset {
+form>fieldset {
     position: relative;
     border-radius: 14px;
     background: white;
@@ -46,34 +64,39 @@ form > fieldset {
     margin-bottom: 1.5rem;
 }
 
-form > fieldset::before {
+form>fieldset::before {
     content: "";
     position: absolute;
-    top: 6px;      
-    left: 6px;     
+    top: 6px;
+    left: 6px;
     width: 100%;
     height: 100%;
-    background: var(--ns-yellow); 
-    border-radius: 14px; 
-    z-index: -1;          
+    background: var(--ns-yellow);
+    border-radius: 14px;
+    z-index: -1;
 }
 
 
 fieldset {
     background: white;
-    border: 1px solid var(--border-grey);
+    border: none;
     border-radius: 14px;
-    padding: 1.2rem;
-    margin-bottom: 1.5rem;
 }
+
 legend {
     font-weight: 600;
     font-size: 1rem;
     padding: 0 0.3rem;
     color: var(--ns-blue);
 }
+
+label {
+    display: block;
+    margin-bottom: 0.5rem;
+}
+
 input {
-    width: 90%;
+
     padding: 0.9rem;
     border-radius: 10px;
     border: 1px solid var(--border-grey);
@@ -87,6 +110,35 @@ input:focus {
     border-color: var(--ns-blue);
     box-shadow: 0 0 0 3px rgba(0, 48, 130, 0.15);
 }
+
+.radio-group {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas:
+
+        "question" "question"
+        "input1" "input2"
+    ;
+
+    gap: 0 1rem;
+
+}
+
+.question {
+    grid-area: "question";
+    font-weight: 400;
+
+}
+
+.radio-group input:first-child {
+    grid-area: "input1";
+}
+
+.radio-group input:last-child {
+    grid-area: "input2";
+}
+
+
 .radio-group label {
     display: block;
     padding: 1rem;
@@ -96,6 +148,7 @@ input:focus {
     background: white;
     cursor: pointer;
     transition: all 0.2s ease;
+    text-align: center;
 }
 
 .radio-group input[type="radio"] {
@@ -110,7 +163,8 @@ input:focus {
     border: 2px solid var(--ns-blue);
     background: rgba(0, 48, 130, 0.15);
 }
-fieldset > fieldset {
+
+fieldset>fieldset {
     border: none;
     padding: 0;
     margin-bottom: 1rem;
@@ -122,6 +176,7 @@ h2 {
     border-left: 4px solid var(--ns-yellow);
     padding-left: 0.8rem;
 }
+
 em {
     color: #5c6b7a;
     font-size: 0.9rem;
@@ -135,44 +190,184 @@ legend {
     border-radius: 4px;
 }
 
-.question{
-    font-weight: 400;
-}
 
 
-
-fieldset[name="Partner overledende"]:has(
-    input[name="heeftPartner"][value="Nee"]:checked
-)
-> fieldset:not(:first-of-type) {
+fieldset[name="Partner-overledende"]:has(input[name="heeftPartner"][value="Nee"]:checked)>fieldset:not(:first-of-type) {
     opacity: 0.4;
     pointer-events: none;
 }
 
-fieldset[name="Nabestaanden"]:has(
-    input[name="heeftKinderen"][value="Nee"]:checked
-)
-> fieldset:not(:first-of-type) {
+fieldset[name="Nabestaanden"]:has(input[name="heeftKinderen"][value="Nee"]:checked)>fieldset:not(:first-of-type) {
     opacity: 0.4;
     pointer-events: none;
 }
 
-fieldset[name="Nabestaanden"]:has(
-    input[name="heeftKinderen"][value="Ja"]:checked
-):has(
-    input[name="isKindEerderOverleden"][value="Nee"]:checked
-)
-> fieldset:nth-of-type(3) {
+fieldset[name="Nabestaanden"]:has(input[name="heeftKinderen"][value="Ja"]:checked):has(input[name="isKindEerderOverleden"][value="Nee"]:checked)>fieldset:nth-of-type(3) {
     opacity: 0.4;
     pointer-events: none;
 }
 
 
-fieldset[name="Testament gegevens"]:has(
-    input[name="heeftTestament"][value="Nee"]:checked
-)
-> fieldset:not(:first-of-type) {
+fieldset[name="Persoongegevens-notaris"]:has(input[name="heeftTestament"][value="Nee"]:checked)>fieldset:not(:first-of-type) {
     opacity: 0.4;
     pointer-events: none;
 }
 
+details>p {
+    padding-block: 1rem
+}
+
+
+button[type="submit"] {
+    display: block;
+    width: 100%;
+    max-width: 300px;
+    margin: 2rem auto;
+    padding: 1rem 2rem;
+    background-color: var(--ns-blue);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: transform 0.1s ease, background-color 0.2s ease;
+    box-shadow: 0 4px 0 #2745f1;
+}
+
+
+.input-wrapper {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+button[type="submit"]:hover {
+    background-color: #3956e4;
+    transform: translateY(-2px);
+}
+
+button[type="submit"]:active {
+    transform: translateY(2px);
+    box-shadow: none;
+}
+
+details {
+    margin-bottom: 1.2rem;
+}
+
+fieldset[name="Persoongegevens-overledene"] {
+    display: grid;
+
+    /* @media (min-width: 720px) {
+        grid-template-columns: 1fr 1fr 1fr;
+    } */
+}
+
+.name-fields {
+    display: grid;
+
+    @media (min-width: 720px) {
+        display: grid;
+        grid-template-columns: 1fr 1fr 2fr;
+        gap: 0 1rem;
+    }
+}
+
+.adress {
+
+    @media (min-width: 720px) {
+        display: grid;
+        grid-template-columns: 3fr 1fr 1fr;
+        gap: 0 1rem;
+    }
+
+}
+
+.zipcode {
+
+    @media (min-width: 720px) {
+        display: grid;
+        grid-template-columns: 1fr 2fr;
+        gap: 0 1rem;
+    }
+
+}
+.protocol {
+    display: grid;
+
+    @media (min-width: 720px) {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 0 1rem;
+    }
+
+}
+
+
+.form-group {
+    margin: 0;
+    padding: 0;
+
+    display: grid;
+
+}
+.conditional-fields {
+    display: none;
+}
+
+/* Een klasse om ze via JS te tonen */
+.is-visible {
+    display: grid; 
+}
+
+/* Voeg een sterretje toe aan labels van verplichte velden */
+label:has(+ input[required])::after {
+    content: " *";
+}
+/* Responsive Layout voor grotere schermen */
+@media (min-width: 720px) {
+
+
+    .name-fields label,
+    .adress label,
+    .zipcode , .protocol label {
+        grid-row: 1;
+    }
+
+    .name-fields input,
+    .adress input,
+    .zipcode input, .protocol input {
+        grid-row: 2;
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+
+    .input-field-container {
+        display: grid;
+        gap: 1rem;
+        grid-template-columns: 2fr 1fr;
+    }
+
+    input[type="radio"] {
+        min-width: 5rem;
+    }
+
+    section {
+
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        max-width: 70%;
+        margin: 0 auto;
+
+        @media (min-width: 1200px) {
+            max-width: 55%;
+
+        }
+
+    }
+
+}

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="nl">
 
 <head>
     <meta charset="UTF-8">
@@ -16,48 +16,56 @@
         <img src="images/NS-logo-geel.png">
     </header>
 
-    <h1>Erfbelasting formulier</h1>
+    <h1>Erfbelasting formulier 2025</h1>
 
     <section>
         <form action="">
             <h2>1. Gegevens van de overledene</h2>
-            <em>Vul hier de gevens in van de overledende.</em>
-            <fieldset name="Persoongegevens overledende">
+            <em>Vul hier de gegevens in van de overledende.</em>
+            <fieldset name="Persoongegevens-overledende">
                 <legend>Persoongegevens overledende</legend>
 
-                <fieldset class="form-group">
-                    <label for="voorlettersOverledene">
+                <fieldset class="form-group name-fields">
+                    <label for="voorlettersOverledene">Voorletter(s)
                     </label>
-                    <input type="text" id="voorlettersOverledene" name="voorlettersOverledene"
-                        placeholder="Voorletter(s)" required>
+                    <input type="text" id="voorlettersOverledene" name="voorlettersOverledene" aria-label="Voorletters"
+                        required>
 
-                    <label for="tussenvoegselOverledene">
+                    <label for="tussenvoegselOverledene">Tussenvoegsel(s)
                     </label>
                     <input type="text" id="tussenvoegselOverledene" name="tussenvoegselOverledene"
-                        placeholder="Tussenvoegsel(s)">
+                        aria-label="Tussenvoegsels">
 
-                    <label for="achternaamOverledene">
+                    <label for="achternaamOverledene">Achternaam
                     </label>
-                    <input type="text" id="achternaamOverledene" name="achternaamOverledene" placeholder="Achternaam" required>
+                    <input type="text" id="achternaamOverledene" name="achternaamOverledene" aria-label="Achternaam"
+                        required>
                 </fieldset>
 
-                <fieldset class="form-group">
-                    <label for="BSNoverledende">
-                        BSN overledene
-                    </label>
-                    <input type="text" id="BSNoverledende" name="BSNoverledende" pattern="[0-9]{9}" required>
-                </fieldset>
+                <div class="input-field-container">
+                    <div class="input-wrapper">
+                        <fieldset class="form-group">
+                            <label for="BSNoverledende">
+                                BSN overledene
+                            </label>
+                            <input type="text" id="BSNoverledende" name="BSNoverledende" pattern="[0-9]{9}" required>
+                        </fieldset>
+                    </div>
+                    <fieldset class="form-group">
+                        <div class="input-wrapper">
 
-                <fieldset class="form-group">
-                    <label for="overlijd">
-                        Overlijdensdatum
-                    </label>
-                    <input type="date" id="overlijd" name="overlijd" min="2026-01-01" max="2026-02-17" required>
-                </fieldset>
+                            <label for="overlijd">
+                                Overlijdensdatum
+                            </label>
+                            <input type="date" id="overlijd" name="overlijd" min="2025-01-01" max="2025-12-31" required>
+                        </div>
+
+                    </fieldset>
+                </div>
 
             </fieldset>
 
-            <fieldset name="Partner overledende">
+            <fieldset name="Partner-overledende">
                 <legend>Partner overledende</legend>
 
                 <fieldset class="radio-group">
@@ -65,9 +73,8 @@
                         Was de overledene getrouwd of had de overledene een geregistreerde partner op het moment van
                         overlijden?
                     </legend>
-
                     <label>
-                        <input type="radio" name="heeftPartner" value="Nee">
+                        <input type="radio" name="heeftPartner" value="Nee" required>
                         Nee
                     </label>
 
@@ -84,7 +91,7 @@
                     </legend>
 
                     <label>
-                        <input type="radio" name="heeftNotarieleAkte" value="Nee">
+                        <input type="radio" name="heeftNotarieleAkte" value="Nee" data-required>
                         Nee
                     </label>
 
@@ -100,7 +107,7 @@
                     </legend>
 
                     <label>
-                        <input type="radio" name="heeftFinaalVerrekenbeding" value="Nee">
+                        <input type="radio" name="heeftFinaalVerrekenbeding" value="Nee" data-required>
                         Nee
                     </label>
 
@@ -119,7 +126,7 @@
                     <legend name="heeftKinderen" class="question">Had de overledene kinderen?</legend>
 
                     <label>
-                        <input type="radio" name="heeftKinderen" value="Nee">
+                        <input type="radio" name="heeftKinderen" value="Nee" required>
                         Nee
                     </label>
 
@@ -131,11 +138,11 @@
 
                 <fieldset class="radio-group conditional-fields">
                     <legend name="isKindEerderOverleden" class="question">
-                        Is 1 van deze kinderen eerder overleden dan de overledene voor wie u nu aangifte doet?
+                        Is één van deze kinderen eerder overleden dan de overledene voor wie u nu aangifte doet?
                     </legend>
 
                     <label>
-                        <input type="radio" name="isKindEerderOverleden" value="Nee">
+                        <input type="radio" name="isKindEerderOverleden" value="Nee" data-required>
                         Nee
                     </label>
 
@@ -149,7 +156,7 @@
                     <legend name="heeftKindZelfKind" class="question">Had dit overleden kind zelf kinderen?</legend>
 
                     <label>
-                        <input type="radio" name="heeftKindZelfKind" value="Nee">
+                        <input type="radio" name="heeftKindZelfKind" value="Nee" data-required>
                         Nee
                     </label>
 
@@ -161,14 +168,14 @@
 
             </fieldset>
 
-            <fieldset name="Testament gegevens">
-                <legend>Testament gegevens</legend>
+            <fieldset name="Persoongegevens-notaris">
+                <legend>Persoongegevens notaris</legend>
 
                 <fieldset class="radio-group">
                     <legend name="heeftTestament" class="question">Had de overledene een testament?</legend>
 
                     <label>
-                        <input type="radio" name="heeftTestament" value="Nee">
+                        <input type="radio" name="heeftTestament" value="Nee" required>
                         Nee
                     </label>
 
@@ -178,36 +185,34 @@
                     </label>
                 </fieldset>
 
-                <fieldset class="conditional-fields" name="Persoongegevens Notaris">
-                    <label>
-                        Protocolnummer Notaris
-                        <input type="number" name="protocolNummerNotaris">
-                    </label>
+                <fieldset class="conditional-fields" name="PersoongegevensNotaris"> 
+                    <fieldset class="protocol form-group"> 
+                        <label for="protocolNummerNotaris">Protocolnummer notaris</label>
+                        <input type="number" id="protocolNummerNotaris" name="protocolNummerNotaris" data-required>
 
-                    <fieldset class="form-group">
-                        <label for="voorlettesNotaris">
-                        </label>
-                        <input type="text" id="voorlettersNotaris" name="voorlettersOverledene"
-                            placeholder="Voorletter(s)">
-
-                        <label for="tussenvoegselNotaris">
-                        </label>
-                        <input type="text" id="tussenvoegselNotaris" name="tussenvoegselNotaris"
-                            placeholder="Tussenvoegsel(s)">
-
-                        <label for="achternaamNotaris">
-                        </label>
-                        <input type="text" id="achternaamNotaris" name="achternaamNotaris" placeholder="Achternaam">
+                        <label for="vestingingsplaats">Vestigingsplaats</label>
+                        <input type="text" id="vestingingsplaats" name="vestingingsplaats" data-required>
                     </fieldset>
 
-                    <label>
-                        Vestigingsplaats
-                        <input type="text" name="vestingingsplaats">
-                    </label>
+                    <fieldset class="form-group name-fields">
+                        <label for="voorlettersNotaris"> Voorletter(s)
+                        </label>
+                        <input type="text" id="voorlettersNotaris" name="voorlettersOverledene" data-required>
+
+                        <label for="tussenvoegselNotaris">Tussenvoegsel(s)
+                        </label>
+                        <input type="text" id="tussenvoegselNotaris" name="tussenvoegselNotaris">
+
+                        <label for="achternaamNotaris">Achternaam
+                        </label>
+                        <input type="text" id="achternaamNotaris" name="achternaamNotaris" data-required>
+                    </fieldset>
+
+
 
                     <label>
                         Datum van het testament of van de laatste wijziging
-                        <input type="date" name="laatsteWijzigingTestament">
+                        <input type="date" name="laatsteWijzigingTestament" data-required>
                     </label>
                 </fieldset>
 
@@ -215,12 +220,13 @@
 
 
             <h2> 2. Gegevens gemachtigde</h2>
-            <em>Vul de gegevens van de gemachtigde in. De gemachtigde is degene die namens 1 of meerdere personen en/of
+            <em>Vul de gegevens van de gemachtigde in. De gemachtigde is degene die namens één of meerdere personen
+                en/of
                 instellingen aangifte doet. Het invullen van een telefoonnummer of e-mailadres is niet verplicht, maar
                 wel handig. Dan kunnen wij u
                 makkelijker vragen stellen of uitleg geven.</em>
 
-            <fieldset name="Identificatie gemachtigde">
+            <fieldset name="Identificatie-gemachtigde">
                 <legend>Identificatie gemachtigde</legend>
 
                 <p><em>Vul 1 van de 3 in: het BSN of RSIN van de gemachtigde, het beconnummer van de adviseur of het
@@ -251,22 +257,24 @@
             </fieldset>
 
 
-            <fieldset name="2b">
+            <fieldset name="Persoongegevens-gemachtigde">
                 <legend>Persoongegevens gemachtigde</legend>
 
-                <fieldset class="form-group">
-                    <label for="voornaamGemachtigde">
-                    </label>
-                    <input type="text" id="voornaamGemachtigde" name="voornaamGemachtigde" placeholder="Voorletter(s)">
 
-                    <label for="tussenvoegselGemachtigde">
-                    </label>
-                    <input type="text" id="tussenvoegselGemachtigde" name="tussenvoegselGemachtigde"
-                        placeholder="Tussenvoegsel(s)">
 
-                    <label for="achternaamGemachtigde">
+                <fieldset class="form-group name-fields">
+
+                    <label for="voorlettersGemachtigde">Voorletter(s)
                     </label>
-                    <input type="text" id="achternaamGemachtigde" name="achternaamGemachtigde" placeholder="Achternaam">
+                    <input type="text" id="voorlettersGemachtigde" name="voornaamGemachtigde" required>
+
+                    <label for="tussenvoegselGemachtigde">Tussenvoegsel(s)
+                    </label>
+                    <input type="text" id="tussenvoegselGemachtigde" name="tussenvoegselGemachtigde">
+
+                    <label for="achternaamGemachtigde">Achternaam
+                    </label>
+                    <input type="text" id="achternaamGemachtigde" name="achternaamGemachtigde" required>
                 </fieldset>
 
                 <fieldset class="form-group">
@@ -278,7 +286,7 @@
 
                 <h3>Adres in Nederland</h3>
 
-                <fieldset class="form-group">
+                <fieldset class="form-group adress">
                     <label for="straatGemachtigdeNL">Straat</label>
                     <input type="text" id="straatGemachtigdeNL" name="straatGemachtigdeNL">
 
@@ -290,9 +298,9 @@
                     <input type="text" id="toevoegingGemachtigdeNL" name="toevoegingGemachtigdeNL">
                 </fieldset>
 
-                <fieldset class="form-group">
+                <fieldset class="form-group zipcode">
                     <label for="postcodeGemachtigdeNL">Postcode</label>
-                    <input type="text" id="postcodeGemachtigdeNL" name="postcodeGemachtigdeNL">
+                    <input type="text" id="postcodeGemachtigdeNL" name="postcodeGemachtigdeNL" >
 
                     <label for="woonplaatsGemachtigdeNL">Plaats</label>
                     <input type="text" id="woonplaatsGemachtigdeNL" name="woonplaatsGemachtigdeNL">
@@ -300,15 +308,18 @@
 
                 <h3>Adres in het buitenland</h3>
 
-                <fieldset class="form-group">
+                <fieldset class="form-group adress">
                     <label for="straatGemachtigdeBuitenland">Straat</label>
                     <input type="text" id="straatGemachtigdeBuitenland" name="straatGemachtigdeBuitenland">
 
                     <label for="huisnummerGemachtigdeBuitenland">Huisnummer</label>
-                    <input type="number" id="huisnummerGemachtigdeBuitenland" name="huisnummerGemachtigdeBuitenland">
+                    <input type="text" id="huisnummerGemachtigdeBuitenland" name="huisnummerGemachtigdeBuitenland">
+
+                    <label for="landcodeGemachtigde">Landcode &#8505;</label>
+                    <input type="text" id="landcodeGemachtigde" name="landcodeGemachtigde" list="landcodes">
                 </fieldset>
 
-                <fieldset class="form-group">
+                <fieldset class="form-group zipcode">
                     <label for="postcodeGemachtigdeBuitenland">Postcode</label>
                     <input type="text" id="postcodeGemachtigdeBuitenland" name="postcodeGemachtigdeBuitenland">
 
@@ -317,39 +328,63 @@
                 </fieldset>
 
                 <fieldset class="form-group">
-                    <label for="landcodeGemachtigde">Landcode</label>
-                    <input type="text" id="landcodeGemachtigde" name="landcodeGemachtigde" list="landcodes">
+
 
 
                     <datalist id="landcodes">
-                        <option value="ALB">Albanie</option>
-                        <option value="ARM">Armenie</option>
-                        <option value="BEL">Belgie</option>
+                        <option value="AUT">Oostenrijk</option>
+                        <option value="BEL">België</option>
+                        <option value="BGR">Bulgarije</option>
+                        <option value="HRV">Kroatië</option>
                         <option value="CYP">Cyprus</option>
+                        <option value="CZE">Tsjechië</option>
                         <option value="DNK">Denemarken</option>
+                        <option value="EST">Estland</option>
+                        <option value="FIN">Finland</option>
+                        <option value="FRA">Frankrijk</option>
+                        <option value="DEU">Duitsland</option>
+                        <option value="GRC">Griekenland</option>
+                        <option value="HUN">Hongarije</option>
+                        <option value="IRL">Ierland</option>
+                        <option value="ITA">Italië</option>
+                        <option value="LVA">Letland</option>
+                        <option value="LTU">Litouwen</option>
+                        <option value="LUX">Luxemburg</option>
+                        <option value="MLT">Malta</option>
+                        <option value="NLD">Nederland</option>
+                        <option value="POL">Polen</option>
+                        <option value="PRT">Portugal</option>
+                        <option value="ROU">Roemenië</option>
+                        <option value="SVK">Slowakije</option>
+                        <option value="SVN">Slovenië</option>
+                        <option value="ESP">Spanje</option>
+                        <option value="SWE">Zweden</option>
                     </datalist>
 
                     <details>
-                        <summary>Toelichting landcode</summary>
-                        Bij de aangifte erfbelasting (en schenkbelasting) vraagt de Belastingdienst om een landcode om
-                        aan te geven waar bezittingen, schulden of erfgenamen zich bevinden. Deze code bestaat altijd
-                        uit 3 letters. Voor Nederland is de code 'NLD'
+                        <summary>&#8505; Toelichting landcode</summary>
+                        <p> Bij de aangifte erfbelasting (en schenkbelasting) vraagt de Belastingdienst om een landcode
+                            om
+                            aan te geven waar bezittingen, schulden of erfgenamen zich bevinden. Deze code bestaat
+                            altijd
+                            uit 3 letters. Voor Nederland is de code 'NLD'</p>
                     </details>
                 </fieldset>
 
                 <fieldset class="form-group">
                     <label for="telefoonnummerGemachtigde">Telefoonnummer</label>
-                    <input type="tel" id="telefoonnummerGemachtigde" name="telefoonnummerGemachtigde">
+                    <input type="tel" id="telefoonnummerGemachtigde" name="telefoonnummerGemachtigde" >
                 </fieldset>
 
                 <fieldset class="form-group">
                     <label for="emailGemachtigde">E-mailadres</label>
-                    <input type="email" id="emailGemachtigde" name="emailGemachtigde" placeholder="voorbeeld@123.nl">
+                    <input type="email" id="emailGemachtigde" name="emailGemachtigde" placeholder="voorbeeld@123.nl"
+                        required>
                 </fieldset>
 
             </fieldset>
 
-
+            <button type="submit">Aangifte versturen</button>
         </form>
     </section>
 </body>
