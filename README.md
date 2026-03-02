@@ -28,7 +28,9 @@ Doel: Het formulier responsive maken met grid en dynamisch maken met progressive
 
 Eerst bleven onzichtbare velden het verzenden blokkeren omdat ze nog op required stonden. Ook bleven velden rood kleuren als de gebruiker zich bedacht en een vraag weer verborg.
 Met js heb ik er voor gezorgd dat zodra een gebruiker "Ja" klikt, worden de vervolgvragen niet alleen zichtbaar, maar worden ze via data-required ook echt verplicht gemaakt.
+
 <img width="473" height="78" alt="image" src="https://github.com/user-attachments/assets/ea530144-fb72-4e5f-8a09-9a6e400721b3" />
+
 Met flex grid en media queries heb ik de lay-out nu mooi responsive voor grote schermen. 
 
 
