@@ -17,6 +17,7 @@ select {
     margin: 0;
 }
 
+/* Error handling */
 input:user-invalid {
     background-color: rgba(238, 161, 161, 0.2);
     border: rgb(255, 89, 89) solid 1px;
@@ -26,7 +27,106 @@ input:not(:required) {
     border: 1px solid var(--border-grey);
     background-color: white;
 }
+input[required]:focus,
+input[required]:not(:placeholder-shown) {
+    transition: border-color 0.2s, background-image 0.2s;
+}
 
+input[required]:not(:placeholder-shown):valid {
+    border-color: #2ecc71;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%232ecc71'%3E%3Cpath d='M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: center right 0.8rem;
+    background-size: 1.2rem;
+}
+
+
+input[required]:focus:invalid {
+    border-color: #f39c12;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23f39c12'%3E%3Cpath d='M11 15h2v2h-2zm0-8h2v6h-2zm.99-5C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: center right 0.8rem;
+    background-size: 1.2rem;
+}
+
+/*  Verwijder feedback van niet-required velden */
+input:not([required]) {
+    background-image: none !important;
+    border-color: var(--border-grey);
+}
+
+fieldset[name="Partner-overledende"]:has(input[name="heeftPartner"][value="Nee"]:checked)>fieldset:not(:first-of-type) {
+    opacity: 0.4;
+    pointer-events: none;
+}
+
+fieldset[name="Nabestaanden"]:has(input[name="heeftKinderen"][value="Nee"]:checked)>fieldset:not(:first-of-type) {
+    opacity: 0.4;
+    pointer-events: none;
+}
+
+fieldset[name="Nabestaanden"]:has(input[name="heeftKinderen"][value="Ja"]:checked):has(input[name="isKindEerderOverleden"][value="Nee"]:checked)>fieldset:nth-of-type(3) {
+    opacity: 0.4;
+    pointer-events: none;
+}
+
+
+fieldset[name="Persoongegevens-notaris"]:has(input[name="heeftTestament"][value="Nee"]:checked)>fieldset:not(:first-of-type) {
+    opacity: 0.4;
+    pointer-events: none;
+}
+
+/* De styling voor wanneer een veld gedeactiveerd is */
+.exclusive-input:disabled {
+    opacity: 0.4;
+    /* cursor: not-allowed; */
+    transition: opacity 0.3s ease;
+}
+
+/* De basis-stijl voor de fieldsets */
+fieldset[name] {
+    position: relative; /* Nodig om het vinkje te positioneren */
+    transition: border-color 0.4s ease;
+}
+
+.form-group:has(input:disabled) {
+    opacity: 0.4;
+}
+
+fieldset[name]:not([name="PersoongegevensNotaris"]).is-complete::after {
+    content: '';
+    position: absolute;
+    top: -30px;
+    right: -16px;
+    width: 30px;
+    height: 30px;
+    background-color: #66ca7d;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='white'%3E%3Cpath d='M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z'/%3E%3C/svg%3E");
+    background-size: 16px;
+    background-repeat: no-repeat;
+    background-position: center;
+    border-radius: 50%;
+    border: 2px solid white;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    
+    animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+
+@keyframes popIn {
+    0% { transform: scale(0) rotate(-20deg); opacity: 0; }
+    100% { transform: scale(1) rotate(0deg); opacity: 1; }
+}
+
+/* De foutmelding styling  */
+.radio-group.invalid-radio {
+    border: 1px solid #d93025;
+    padding: 10px;
+    background-color: #fff8f8;
+    animation: shake 0.2s ease-in-out;
+}
+
+/* General styling /////////////////////////////////////////////////////////////////*/
 body {
     font-family: system-ui, -apple-system, sans-serif;
     background-color: var(--light-grey);
@@ -54,7 +154,7 @@ h1 {
 section {
     padding: 1.5rem;
 }
-
+/* Form styling /////////////////////////////////////////////////////////////// */
 form>fieldset {
     position: relative;
     border-radius: 14px;
@@ -175,6 +275,7 @@ h2 {
     margin-bottom: 1rem;
     border-left: 4px solid var(--ns-yellow);
     padding-left: 0.8rem;
+    margin-top: 4rem;
 }
 
 em {
@@ -192,26 +293,7 @@ legend {
 
 
 
-fieldset[name="Partner-overledende"]:has(input[name="heeftPartner"][value="Nee"]:checked)>fieldset:not(:first-of-type) {
-    opacity: 0.4;
-    pointer-events: none;
-}
 
-fieldset[name="Nabestaanden"]:has(input[name="heeftKinderen"][value="Nee"]:checked)>fieldset:not(:first-of-type) {
-    opacity: 0.4;
-    pointer-events: none;
-}
-
-fieldset[name="Nabestaanden"]:has(input[name="heeftKinderen"][value="Ja"]:checked):has(input[name="isKindEerderOverleden"][value="Nee"]:checked)>fieldset:nth-of-type(3) {
-    opacity: 0.4;
-    pointer-events: none;
-}
-
-
-fieldset[name="Persoongegevens-notaris"]:has(input[name="heeftTestament"][value="Nee"]:checked)>fieldset:not(:first-of-type) {
-    opacity: 0.4;
-    pointer-events: none;
-}
 
 details>p {
     padding-block: 1rem
@@ -254,6 +336,10 @@ button[type="submit"]:active {
 
 details {
     margin-bottom: 1.2rem;
+}
+
+summary {
+    cursor: pointer;
 }
 
 fieldset[name="Persoongegevens-overledene"] {
@@ -304,6 +390,16 @@ fieldset[name="Persoongegevens-overledene"] {
 
 }
 
+#contact-info{
+    display: grid;
+
+    @media (min-width: 720px) {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 0 1rem;
+    }
+}
+
 
 .form-group {
     margin: 0;
@@ -312,9 +408,29 @@ fieldset[name="Persoongegevens-overledene"] {
     display: grid;
 
 }
+/* Standaard zijn velden zichtbaar voor als JS uitstaat */
 .conditional-fields {
+    display: grid; 
+    transition: opacity 0.3s ease;
+}
+
+/* Alleen als JavaScript actief is (we voegen straks een class 'js-enabled' toe), 
+   mogen de velden verborgen worden */
+.js-enabled .conditional-fields {
     display: none;
 }
+
+/* Als JS aanstaat EN de sectie moet zichtbaar zijn */
+.js-enabled .conditional-fields.is-visible {
+    display: grid;
+}
+
+.conditional-fields h3 {
+    order: -1; 
+    width: 100%;
+    margin-bottom: 1rem;
+}
+
 
 /* Een klasse om ze via JS te tonen */
 .is-visible {
@@ -329,11 +445,11 @@ label:has(+ input[required])::after {
 @media (min-width: 720px) {
 
 
-    .name-fields label,
+    /* .name-fields label,
     .adress label,
     .zipcode , .protocol label {
         grid-row: 1;
-    }
+    } */
 
     .name-fields input,
     .adress input,

@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Erfbelasting</title>
+    <title>Erfbelasting 2025</title>
 
     <link rel="stylesheet" href="style.css">
 </head>
@@ -74,7 +74,7 @@
                         overlijden?
                     </legend>
                     <label>
-                        <input type="radio" name="heeftPartner" value="Nee" required>
+                        <input type="radio" name="heeftPartner" value="Nee" data-required>
                         Nee
                     </label>
 
@@ -85,7 +85,7 @@
                 </fieldset>
 
                 <fieldset class="radio-group conditional-fields">
-                    <legend name="heeftNotarieleAkte" class="question">
+                    <legend name="heeftNotarieleAkte" class="question ">
                         Hadden de overledene en diens echtgenoot of geregistreerde partner huwelijkse of
                         partnerschapsvoorwaarden laten vastleggen in een notariële akte?
                     </legend>
@@ -126,7 +126,7 @@
                     <legend name="heeftKinderen" class="question">Had de overledene kinderen?</legend>
 
                     <label>
-                        <input type="radio" name="heeftKinderen" value="Nee" required>
+                        <input type="radio" name="heeftKinderen" value="Nee" data-required>
                         Nee
                     </label>
 
@@ -153,7 +153,7 @@
                 </fieldset>
 
                 <fieldset class="radio-group conditional-fields">
-                    <legend name="heeftKindZelfKind" class="question">Had dit overleden kind zelf kinderen?</legend>
+                    <legend name="heeftKindZelfKind" class="question">Had de overledene kleinkinderen?</legend>
 
                     <label>
                         <input type="radio" name="heeftKindZelfKind" value="Nee" data-required>
@@ -175,7 +175,7 @@
                     <legend name="heeftTestament" class="question">Had de overledene een testament?</legend>
 
                     <label>
-                        <input type="radio" name="heeftTestament" value="Nee" required>
+                        <input type="radio" name="heeftTestament" value="Nee" data-required>
                         Nee
                     </label>
 
@@ -185,8 +185,8 @@
                     </label>
                 </fieldset>
 
-                <fieldset class="conditional-fields" name="PersoongegevensNotaris"> 
-                    <fieldset class="protocol form-group"> 
+                <fieldset class="conditional-fields" name="PersoongegevensNotaris">
+                    <fieldset class="protocol form-group">
                         <label for="protocolNummerNotaris">Protocolnummer notaris</label>
                         <input type="number" id="protocolNummerNotaris" name="protocolNummerNotaris" data-required>
 
@@ -226,7 +226,7 @@
                 wel handig. Dan kunnen wij u
                 makkelijker vragen stellen of uitleg geven.</em>
 
-            <fieldset name="Identificatie-gemachtigde">
+            <fieldset name="Identificatie-gemachtigde" id="identificatie-sectie">
                 <legend>Identificatie gemachtigde</legend>
 
                 <p><em>Vul 1 van de 3 in: het BSN of RSIN van de gemachtigde, het beconnummer van de adviseur of het
@@ -237,21 +237,23 @@
                     <label for="bsnGemachtigde">
                         BSN/RSIN gemachtigde
                     </label>
-                    <input type="number" id="bsnGemachtigde" name="bsnGemachtigde">
+                    <input type="text" id="bsnGemachtigde" name="bsnGemachtigde" class="exclusive-input"
+                        pattern="[0-9]{9}" required>
                 </fieldset>
 
                 <fieldset class="form-group">
                     <label for="beconnummer">
                         Beconnummer adviseur
                     </label>
-                    <input type="number" id="beconnummer" name="beconnummer">
+                    <input type="text" id="beconnummer" name="beconnummer" class="exclusive-input">
                 </fieldset>
 
                 <fieldset class="form-group">
                     <label for="protocolnummerNotarisGemachtigde">
                         Protocolnummer notaris
                     </label>
-                    <input type="number" id="protocolnummerNotarisGemachtigde" name="protocolnummerNotarisGemachtigde">
+                    <input type="text" id="protocolnummerNotarisGemachtigde" name="protocolnummerNotarisGemachtigde"
+                        class="exclusive-input">
                 </fieldset>
 
             </fieldset>
@@ -284,53 +286,99 @@
                     <input type="text" id="naamInstelling" name="naamInstelling">
                 </fieldset>
 
-                <h3>Adres in Nederland</h3>
+                <div id="contact-info">
 
-                <fieldset class="form-group adress">
-                    <label for="straatGemachtigdeNL">Straat</label>
-                    <input type="text" id="straatGemachtigdeNL" name="straatGemachtigdeNL">
+                    <fieldset class="form-group">
+                        <label for="emailGemachtigde">E-mailadres</label>
+                        <input type="email" id="emailGemachtigde" name="emailGemachtigde" placeholder=" " required>
+                    </fieldset>
 
-                    <label for="huisnummerGemachtigdeNL">Huisnummer</label>
-                    <input type="text" id="huisnummerGemachtigdeNL" name="huisnummerGemachtigdeNL" pattern="[0-9]{4}"
-                        required>
+                    <fieldset class="form-group">
+                        <label for="telefoonnummerGemachtigde">Telefoonnummer</label>
+                        <input type="tel" id="telefoonnummerGemachtigde" name="telefoonnummerGemachtigde">
+                    </fieldset>
 
-                    <label for="toevoegingGemachtigdeNL">Toevoeging</label>
-                    <input type="text" id="toevoegingGemachtigdeNL" name="toevoegingGemachtigdeNL">
+                </div>
+
+                <fieldset class="radio-group">
+                    <legend class="question">Waar is de gemachtigde gevestigd?</legend>
+                    <label>
+                        <input type="radio" name="locatieGemachtigde" value="NL" checked required>
+                        Nederland
+                    </label>
+                    <label>
+                        <input type="radio" name="locatieGemachtigde" value="Buitenland">
+                        Buitenland
+                    </label>
                 </fieldset>
 
-                <fieldset class="form-group zipcode">
-                    <label for="postcodeGemachtigdeNL">Postcode</label>
-                    <input type="text" id="postcodeGemachtigdeNL" name="postcodeGemachtigdeNL" >
+                <div id="section-adress-nl" class="conditional-fields">
+                    <h3>Adres in Nederland</h3>
 
-                    <label for="woonplaatsGemachtigdeNL">Plaats</label>
-                    <input type="text" id="woonplaatsGemachtigdeNL" name="woonplaatsGemachtigdeNL">
-                </fieldset>
+                    <fieldset class="form-group adress">
+                        <label for="straatGemachtigdeNL">Straat</label>
+                        <input type="text" id="straatGemachtigdeNL" name="straatGemachtigdeNL" placeholder=" "
+                            data-required>
 
-                <h3>Adres in het buitenland</h3>
+                        <label for="huisnummerGemachtigdeNL">Huisnummer</label>
+                        <input type="text" id="huisnummerGemachtigdeNL" name="huisnummerGemachtigdeNL" placeholder=" "
+                            pattern="[1-9][0-9]{0,4}" data-required>
 
-                <fieldset class="form-group adress">
-                    <label for="straatGemachtigdeBuitenland">Straat</label>
-                    <input type="text" id="straatGemachtigdeBuitenland" name="straatGemachtigdeBuitenland">
+                        <label for="toevoegingGemachtigdeNL">Toevoeging</label>
+                        <input type="text" id="toevoegingGemachtigdeNL" name="toevoegingGemachtigdeNL" placeholder=" ">
+                    </fieldset>
 
-                    <label for="huisnummerGemachtigdeBuitenland">Huisnummer</label>
-                    <input type="text" id="huisnummerGemachtigdeBuitenland" name="huisnummerGemachtigdeBuitenland">
+                    <fieldset class="form-group zipcode">
+                        <label for="postcodeGemachtigdeNL">Postcode</label>
+                        <input type="text" id="postcodeGemachtigdeNL" name="postcodeGemachtigdeNL" placeholder=" "
+                            pattern="[1-9][0-9]{3}\s?[A-Z]{2}" data-required title="BV: 1234AB">
 
-                    <label for="landcodeGemachtigde">Landcode &#8505;</label>
-                    <input type="text" id="landcodeGemachtigde" name="landcodeGemachtigde" list="landcodes">
-                </fieldset>
+                        <label for="woonplaatsGemachtigdeNL">Plaats</label>
+                        <input type="text" id="woonplaatsGemachtigdeNL" name="woonplaatsGemachtigdeNL" placeholder=" "
+                            data-required>
+                    </fieldset>
+                </div>
 
-                <fieldset class="form-group zipcode">
-                    <label for="postcodeGemachtigdeBuitenland">Postcode</label>
-                    <input type="text" id="postcodeGemachtigdeBuitenland" name="postcodeGemachtigdeBuitenland">
+                <div id="section-adress-abroad" class="conditional-fields">
+                    <h3>Adres in het buitenland</h3>
 
-                    <label for="woonplaatsGemachtigdeBuitenland">Plaats</label>
-                    <input type="text" id="woonplaatsGemachtigdeBuitenland" name="woonplaatsGemachtigdeBuitenland">
-                </fieldset>
+                    <fieldset class="form-group adress">
+                        <label for="straatGemachtigdeBuitenland">Straat</label>
+                        <input type="text" id="straatGemachtigdeBuitenland" name="straatGemachtigdeBuitenland"
+                            placeholder=" " data-required>
+
+                        <label for="huisnummerGemachtigdeBuitenland">Huisnummer</label>
+                        <input type="text" id="huisnummerGemachtigdeBuitenland" name="huisnummerGemachtigdeBuitenland"
+                            placeholder=" " pattern="[1-9][0-9]{0,4}" data-required>
+
+                        <label for="landcodeGemachtigde">Landcode &#8505;</label>
+                        <input type="text" id="landcodeGemachtigde" name="landcodeGemachtigde" list="landcodes"
+                            placeholder=" " data-required>
+                    </fieldset>
+                    <details>
+                        <summary>&#8505; Toelichting landcode</summary>
+                        <p> Bij de aangifte erfbelasting (en schenkbelasting) vraagt de Belastingdienst om een
+                            landcode
+                            om
+                            aan te geven waar bezittingen, schulden of erfgenamen zich bevinden. Deze code bestaat
+                            altijd
+                            uit 3 letters. Voor België is de code 'BEL'</p>
+                    </details>
+
+                    <fieldset class="form-group zipcode">
+                        <label for="postcodeGemachtigdeBuitenland">Postcode</label>
+                        <input type="text" id="postcodeGemachtigdeBuitenland" name="postcodeGemachtigdeBuitenland"
+                            placeholder=" " pattern="[1-9][0-9]{3}\s?[A-Z]{2}" data-required>
+
+                        <label for="woonplaatsGemachtigdeBuitenland">Plaats</label>
+                        <input type="text" id="woonplaatsGemachtigdeBuitenland" name="woonplaatsGemachtigdeBuitenland"
+                            placeholder=" " data-required>
+                    </fieldset>
+
+                </div>
+
 
                 <fieldset class="form-group">
-
-
-
                     <datalist id="landcodes">
                         <option value="AUT">Oostenrijk</option>
                         <option value="BEL">België</option>
@@ -351,7 +399,6 @@
                         <option value="LTU">Litouwen</option>
                         <option value="LUX">Luxemburg</option>
                         <option value="MLT">Malta</option>
-                        <option value="NLD">Nederland</option>
                         <option value="POL">Polen</option>
                         <option value="PRT">Portugal</option>
                         <option value="ROU">Roemenië</option>
@@ -360,32 +407,10 @@
                         <option value="ESP">Spanje</option>
                         <option value="SWE">Zweden</option>
                     </datalist>
-
-                    <details>
-                        <summary>&#8505; Toelichting landcode</summary>
-                        <p> Bij de aangifte erfbelasting (en schenkbelasting) vraagt de Belastingdienst om een landcode
-                            om
-                            aan te geven waar bezittingen, schulden of erfgenamen zich bevinden. Deze code bestaat
-                            altijd
-                            uit 3 letters. Voor Nederland is de code 'NLD'</p>
-                    </details>
                 </fieldset>
-
-                <fieldset class="form-group">
-                    <label for="telefoonnummerGemachtigde">Telefoonnummer</label>
-                    <input type="tel" id="telefoonnummerGemachtigde" name="telefoonnummerGemachtigde" >
-                </fieldset>
-
-                <fieldset class="form-group">
-                    <label for="emailGemachtigde">E-mailadres</label>
-                    <input type="email" id="emailGemachtigde" name="emailGemachtigde" placeholder="voorbeeld@123.nl"
-                        required>
-                </fieldset>
-
-            </fieldset>
-
-            <button type="submit">Aangifte versturen</button>
+                <button type="submit">Aangifte versturen</button>
         </form>
+        
     </section>
 </body>
 <script src="script.js"></script>
