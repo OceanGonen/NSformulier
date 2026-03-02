@@ -108,12 +108,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 
-    // ---  EXCLUSIVE INPUT LOGICA ---
-    const inputs = document.querySelectorAll('.exclusive-input');
+    // ---  1 van 3 INPUT LOGICA ---
+    const oneOfXinputs = document.querySelectorAll('.exclusive-input');
+
     function updateRequirements() {
-        const isAnyFilled = Array.from(inputs).some(input => input.value.length > 0);
-        inputs.forEach(input => {
-            if (isAnyFilled) {
+        const oneOfXinputsFilled = Array.from(oneOfXinputs).some(input => input.value.length > 0);
+
+        oneOfXinputs.forEach(input => {
+            if (oneOfXinputsFilled) {
                 if (input.value.length > 0) {
                     input.required = true;
                     input.disabled = false;
@@ -126,10 +128,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 input.disabled = false;
             }
         });
-        updateAllFieldsetStatus(); // Check of de sectie nu compleet is
+        updateAllFieldsetStatus(); 
     }
 
-    inputs.forEach(input => {
+    oneOfXinputs.forEach(input => {
         input.addEventListener('input', updateRequirements);
     });
     updateRequirements();
