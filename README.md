@@ -66,3 +66,20 @@ MDN - Constraint validation API
 StackOverflow - HTML5 validation 'An invalid form control is not focusable'
 
 JavaScript.info - Forms: event and method submit
+
+Dinsdag 03/03
+
+Doel: Toegankelijkheid verbeteren en de conditionele logica bij nabestaanden correct implementeren.
+
+Behaald:
+
+Conditionele Erfrecht-logica:
+De laatste vraag bij nabestaanden wordt nu alleen zichtbaar én verplicht wanneer de vorige vraag “Ja” is. Bij “Nee” wordt deze verborgen, disabled en niet meer required.
+
+Optimalisatie updateVisibility():
+Beter begrip gekregen van data-required en dataset.required, waardoor verplichte velden alleen actief zijn wanneer een sectie zichtbaar is.
+
+Technische uitdagingen & Leerpunten:
+
+Validatie-volgorde:
+required moet eerst verwijderd worden vóór een veld wordt verborgen of disabled om browserfouten te voorkomen.
