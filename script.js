@@ -3,13 +3,12 @@ document.addEventListener('DOMContentLoaded', () => {
     document.body.classList.add('js-enabled');
     const form = document.querySelector('form');
 
-    // --- 1. VISUELE VALIDATIE LOGICA (NIEUW) ---
+    // --- VISUELE VALIDATIE LOGICA ---
     const validateFieldset = (fieldset) => {
         // Selecteer alleen de zichtbare required velden
         const requiredInputs = fieldset.querySelectorAll('input[required]');
-        
-        // Een fieldset is valide als er tenminste één required veld is 
-        // en ze allemaal voldoen aan de browser-validatie (.checkValidity)
+
+
         const allValid = requiredInputs.length > 0 && Array.from(requiredInputs).every(input => input.checkValidity());
 
         if (allValid) {
@@ -34,27 +33,29 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 
-
-
-
-
-
     // ---  ZICHTBAARHEID LOGICA ---
     const updateVisibility = (element, condition) => {
+        const inputs = element.querySelectorAll('input, select, textarea');
+
         if (condition) {
             element.classList.add('is-visible');
-            const inputs = element.querySelectorAll('[data-required]');
-            inputs.forEach(input => { input.required = true; });
+
+            inputs.forEach(input => {
+                input.disabled = false;
+
+                if (input.dataset.required !== undefined) {
+                    input.required = true;
+                }
+            });
+
         } else {
             element.classList.remove('is-visible');
-            const inputs = element.querySelectorAll('input');
+
             inputs.forEach(input => {
                 input.required = false;
-                if (input.type === 'radio' || input.type === 'checkbox') {
-                    input.checked = false;
-                } else {
-                    input.value = '';
-                }
+                input.checked = false;
+                input.value = '';
+                input.disabled = true;
             });
         }
     };
@@ -62,18 +63,19 @@ document.addEventListener('DOMContentLoaded', () => {
     const toggleFields = () => {
         // Partner logica
         const heeftPartner = form.querySelector('input[name="heeftPartner"]:checked')?.value === 'Ja';
-        const partnerExtraVragen = document.querySelectorAll('fieldset[name="Partner-overledende"] .conditional-fields');
+        const partnerExtraVragen = document.querySelectorAll('fieldset[name="Partner-overledene"] .conditional-fields');
         partnerExtraVragen.forEach(field => updateVisibility(field, heeftPartner));
 
         // Kinderen logica
         const heeftKinderen = form.querySelector('input[name="heeftKinderen"]:checked')?.value === 'Ja';
         const kindOverledenVraag = form.querySelector('input[name="isKindEerderOverleden"]')?.closest('fieldset');
-        if(kindOverledenVraag) updateVisibility(kindOverledenVraag, heeftKinderen);
+        if (kindOverledenVraag) updateVisibility(kindOverledenVraag, heeftKinderen);
 
         // Kleinkinderen logica
-        const kindEerderOverleden = form.querySelector('input[name="isKindEerderOverleden"]:checked')?.value === 'Ja';
         const kleinkindVraag = form.querySelector('input[name="heeftKindZelfKind"]')?.closest('fieldset');
-        if(kleinkindVraag) updateVisibility(kleinkindVraag, heeftKinderen && kindEerderOverleden);
+        if (kleinkindVraag) {
+            updateVisibility(kleinkindVraag, heeftKinderen);
+        }
 
         // Testament logica
         const heeftTestament = form.querySelector('input[name="heeftTestament"]:checked')?.value === 'Ja';
@@ -94,7 +96,7 @@ document.addEventListener('DOMContentLoaded', () => {
     form.addEventListener('change', toggleFields);
     // Luister ook naar input (voor tekstvelden) voor de groene vinkjes
     form.addEventListener('input', updateAllFieldsetStatus);
-    
+
     toggleFields();
 
 
@@ -128,7 +130,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 input.disabled = false;
             }
         });
-        updateAllFieldsetStatus(); 
+        updateAllFieldsetStatus();
     }
 
     oneOfXinputs.forEach(input => {
@@ -150,7 +152,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 
-    
+
 
     // --- INPUT FORMATTERING ---
     const voorletterInputs = [
@@ -161,25 +163,72 @@ document.addEventListener('DOMContentLoaded', () => {
 
     voorletterInputs.forEach(input => {
         if (input) {
-            input.addEventListener('input', function() {
+            input.addEventListener('input', function () {
                 let cleaned = this.value.replace(/[^a-zA-Z]/g, '').toUpperCase();
                 let formatted = cleaned.split('').join(' ');
-                if (formatted.length > 0) formatted;
                 this.value = formatted;
             });
-            input.addEventListener('keydown', function(e) {
+            input.addEventListener('keydown', function (e) {
                 if (e.key === '.') e.preventDefault();
+            });
+        }
+    });
+
+    const hoofdletterInputs = [
+        document.getElementById("achternaamOverledene"),
+        document.getElementById("achternaamNotaris"),
+        document.getElementById("achternaamGemachtigde"),
+        document.getElementById("woonplaatsGemachtigdeNL"),
+        document.getElementById("woonplaatsGemachtigdeBuitenland"),
+    ]
+
+    hoofdletterInputs.forEach(input => {
+        if (input) {
+            input.addEventListener('input', function () {
+                let value = this.value.trim();
+                if (value.length > 0) {
+                    this.value = value.charAt(0).toUpperCase() + value.slice(1);
+                }
             });
         }
     });
 
     const postcodeInputs = document.querySelectorAll('input[name*="postcode"]');
     postcodeInputs.forEach(input => {
-        input.addEventListener('input', function() {
+        input.addEventListener('input', function () {
             this.value = this.value.toUpperCase();
         });
     });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   // --- SUBMIT TEST ---
+    form.addEventListener('submit', function (e) {
+        console.log('Submit geklikt');
+
+        if (form.checkValidity()) {
+            console.log(' Formulier is VALID en kan verstuurd worden');
+        } else {
+            console.log(' Formulier is NIET valid');
+            console.log('Validatiestatus:', form.checkValidity());
+        }
+
+        // Tijdelijk voorkomen dat hij echt verstuurt tijdens testen
+        e.preventDefault();
+    });
+
+
 });
-
-
-

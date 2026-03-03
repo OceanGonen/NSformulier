@@ -55,7 +55,7 @@ input:not([required]) {
     border-color: var(--border-grey);
 }
 
-fieldset[name="Partner-overledende"]:has(input[name="heeftPartner"][value="Nee"]:checked)>fieldset:not(:first-of-type) {
+fieldset[name="Partner-overledene"]:has(input[name="heeftPartner"][value="Nee"]:checked)>fieldset:not(:first-of-type) {
     opacity: 0.4;
     pointer-events: none;
 }
@@ -252,8 +252,11 @@ input:focus {
 }
 
 .radio-group input[type="radio"] {
-    display: none;
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
 }
+
 
 .radio-group label:hover {
     border-color: var(--ns-blue);
