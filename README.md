@@ -83,3 +83,22 @@ Technische uitdagingen & Leerpunten:
 
 Validatie-volgorde:
 required moet eerst verwijderd worden vóór een veld wordt verborgen of disabled om browserfouten te voorkomen.
+
+#WEEK#
+
+
+Maandag 09/03
+Doel: BSN-invoer maken met direct userfeedback.
+
+Ik heb me vandaag gericht op een BSN-checksysteem gebouwd dat direct visuele feedback geeft (via oranje en rode meldingen) als een nummer te kort of te lang is. Ook heb ik de "1 van de 3" logica voor de gemachtigde geïmplementeerd: zodra de gebruiker in één identificatieveld typt, worden de andere twee opties direct disabled en visueel vervaagd om invoerfouten te voorkomen.
+Behaald:
+
+Real-time BSN check: Een script gefixt dat tijdens het typen checkt of de BSN te kort of te lang is. Geen verrassingen meer bij het verzenden.
+
+Slimme meldingen: De foutmelding verschijnt nu automatisch via JS onder het juiste veld. Rood als je het veld verlaat (blur), oranje terwijl je typt (focus).
+
+
+Dinsdag 10/03
+
+Vandaag was ik bezig met het maken van de verkrijgers-sectie en het verfijnen van de sectie-validatie. Ik heb een "Add/Remove" systeem gebruikt waarmee gebruikers naar behoefte extra verkrijgers kunnen toevoegen, waarbij de verwijderknop via CSS absolute positioning strak in de bovenhoek is geplaatst. Daarna heb ik de sectie-validatie uitgebreid: als een gebruiker bij de radio-button kiest voor "Nee" (geen extra verkrijgers), krijgt de hele fieldset direct een groen vinkje als voltooid, terwijl bij "Ja" de validatie pas groen wordt als alle dynamische velden correct zijn ingevuld.
+
