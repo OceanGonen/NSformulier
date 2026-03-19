@@ -70,7 +70,7 @@ Doel: De gebruikerservaring verbeteren met formattering en het oplossen van vali
 
 Behaald:
 
-Input Formatting (UX): Een script toegevoegd dat voorletters tijdens het typen opschoont (alleen letters), omzet naar hoofdletters en automatisch spaties toevoegt. Dit voorkomt dat gebruikers zelf punten of spaties moeten invoeren en zorgt voor een uniforme dataset. Ook postcodes worden nu automatisch naar hoofdletters omgezet.
+Input Formatting (UX): Een script toegevoegd dat voorletters tijdens het typen opschoont (alleen letters), omzet naar hoofdletters en automatisch spaties toevoegt. Dit voorkomt dat gebruikers zelf punten of spaties moeten invoeren en zorgt voor een uniforme dataset. Ook postcodes worden nu automatisch naar hoofdletters omgezet. Hier had ik wel AI voor ingeschakeld aangezien ik regEx format niet helemaal van te voren wist. 
 <img width="775" height="299" alt="image" src="https://github.com/user-attachments/assets/e5f2ce8a-427e-4d0e-9a8a-e9bc67245fd9" />
 
 
@@ -89,6 +89,8 @@ Conclusie: Het dynamisch verplicht maken van radio buttons via JavaScript is com
 ### Bronnen:
 
 MDN - Constraint validation API
+
+Gemini AI: prompt: hoe maak je input values automisch hoofdletters met js?
 
 StackOverflow - HTML5 validation 'An invalid form control is not focusable'
 
@@ -167,4 +169,50 @@ Het grootste leermoment was weer uit de wekelijkse feedback, dat ik was vergeten
 <img width="973" height="410" alt="image" src="https://github.com/user-attachments/assets/eeb009eb-3b47-43f8-b60f-a3e1efb682ae" />
 
 
+## **Maandag 17/03**
 
+**Het doel:** kunnen printen of opslaan als PDF.
+
+De browser-native window.print() is makkelijk aan te roepen via een button-click, maar het resultaat zag er in de print-preview niet uit. De navigatiebalk, de felgekleurde knoppen en de achtergrondkleuren verpestten het overzicht. Ik moest hier een @media print voor opzetten.
+<img width="1350" height="927" alt="image" src="https://github.com/user-attachments/assets/693257c5-9d5b-43d7-baac-52ad248ee495" />
+
+
+Teksten allemaal zwart wit gemaakt, input velden meer als schriftelijke invul velden laten lijken, Knoppen zoals de "Verwijder verkrijger"-buttons, de "Toevoeg"-knop en de gehele header heb ik met display: none verborgen. Ook de groene vinkjes (.is-complete::after) heb ik weggehaald.
+<img width="1338" height="910" alt="image" src="https://github.com/user-attachments/assets/74df0808-0820-4712-a704-bd2ec06c64f6" />
+
+
+Een specifiek probleem was de layout van de secties. Grid zorgden ervoor dat elementen midden in een regel afbraken bij een paginaovergang. Ik voegde break-inside: avoid toe aan de containers om te voorkomen dat informatie over twee pagina's werd gesplitst, maar dat zorgde voor heel veel witruimte, dus daar was ik ook niet echt tevreden mee. Ik wilde een lay-out net als bij de officieele belastingdienst waarbij alle vragen aan de linkerkant staan en alle antwoorden aan de rechterkant.
+<img width="1070" height="1039" alt="image" src="https://github.com/user-attachments/assets/83fd9dc7-8785-487d-92d4-24e22a5f65bf" />
+maar zelf na wat pogingen en veel stoeien wilde het nog steeds niet lukken. 
+<img width="608" height="448" alt="image" src="https://github.com/user-attachments/assets/8c7ea214-f5ff-41e7-be65-794c8a94821b" />
+
+Ten slotte wilde ik alle logica voor verborgen velden overschrijven. In de printversie moet alles simpelweg zichtbaar zijn. Met visibility: visible !important en opacity: 1 !important probeerde ik ervoor te zorgen dat ook de voorwaardelijke secties (zoals het adres in het buitenland of de lijst met verkrijgers) op papier verschijnen, maar ze zijn helaas nog steeds greyed out.
+<img width="1347" height="918" alt="image" src="https://github.com/user-attachments/assets/df778514-e059-4060-9ca3-e513ca5bc8e4" />
+
+
+## Week Reflectie:
+Afgelopen week heb ik me volledig gericht op het transformeren van mijn interactieve formulier naar een statisch, printbaar document. Het doel was een overzicht dat qua strakheid en indeling lijkt op de officiële formulieren van de Belastingdienst. Het is debateerbaar om te zeggen dat het gelukt is. Mijn eindresultaat voor de printversie is een gestript document waarin alle web-elementen, zoals de navigatiebalk, headers en interactieve knoppen (#addVerkrijgerBtn, .remove-verkrijger), volledig zijn verborgen met display: none !important.
+
+**Wat ging soepel en wat was uitdagend?**
+Soepel: Het opschonen van de pagina. Het was relatief eenvoudig om met @media print alle overbodige UI-elementen en de "is-complete" vinkjes te verbergen. 
+
+Uitdagend: De lay-out van de vragen en antwoorden. Ik wilde dat alles op één lijn bleef, maar bij langere vragen of specifieke input-velden versprong de grid. Het vinden van de juiste verhouding (45/55) was een flinke puzzel.
+
+Trots op: De transformatie van de input-velden. Door de randen weg te halen en alleen een border-bottom over te houden, kreeg het formulier direct die "officieele" papieren uitstraling.
+
+Experimenten die 'faalden'
+Mijn grootste frustratie zat in het voorkomen van gaten in de tekst. Ik experimenteerde met break-inside: avoid om te voorkomen dat een vraag en antwoord over twee pagina's werden gesplitst. Hoewel dit technisch werkte, ontstonden er enorme witte vlakken onderaan de pagina's omdat de browser hele blokken naar de volgende pagina doorschoof. Dit zag er niet professioneel uit.
+
+Daarnaast probeerde ik alle voorwaardelijke velden (zoals buitenlandse adressen) geforceerd zichtbaar te maken voor de print:
+
+CSS
+.conditional-fields {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+}
+Ondanks deze poging bleven sommige secties "greyed out" of zelfs onzichtbaar in de preview. Het lijkt erop dat de disabled status uit de JavaScript de CSS-styling in de weg zit tijdens het printen.
+
+
+Wat ik verder wil verkennen
+In de toekomst wil ik dieper duiken in de interactie tussen mijn JavaScript en de print-status. Ik wil onderzoeken of ik een speciale "print-modus" in JS kan triggeren die alle velden tijdelijk enabled maakt voordat window.print() wordt aangeroepen, zodat die "greyed out" look definitief verdwijnt. Ook wil ik de paginabreuken slimmer aansturen zodat de witruimte tot een minimum beperkt blijft.
