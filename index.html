@@ -9,23 +9,27 @@
     <link rel="stylesheet" href="style.css">
 </head>
 
-<body>
-    <strong>Dit is een schoolproject</strong>
+<body>  
 
     <header>
         <img src="images/NS-logo-geel.png">
+        <img src="images/zwartwitLogo.png" style="display: none;">
+        <button type="button" id="printBtn" class="secondary-button">Print	
+&#9113;</button>
     </header>
+    <strong>Dit is een schoolproject</strong>
 
-    <h1>Erfbelasting formulier 2025</h1>
+    <h1>Erfbelasting formulier 2025</h1>        
+
 
     <section>
-        <form action="" >
+        <form action="">
             <h2>1. Gegevens van de overledene</h2>
             <em>Vul hier de gegevens in van de overledende.</em>
             <fieldset name="Persoongegevens-overledene">
                 <legend>Persoongegevens overledende</legend>
 
-                <fieldset class="form-group name-fields">
+                <fieldset class="form-group name-fields">   
                     <label for="voorlettersOverledene">Voorletter(s)
                     </label>
                     <input type="text" id="voorlettersOverledene" name="voorlettersOverledene" aria-label="Voorletters"
@@ -45,10 +49,11 @@
                 <div class="input-field-container">
                     <div class="input-wrapper">
                         <fieldset class="form-group">
-                            <label for="BSNoverledende">
+                            <label for="bsnOverledende">
                                 BSN overledene
                             </label>
-                            <input type="text" id="BSNoverledende" name="BSNoverledende" pattern="[0-9]{9}" required>
+                            <input type="text" id="bsnOverledende" name="bsnOverledende" pattern="[0-9]{9}" required>
+                            <span id="bsn-melding" style="display:block; font-size: 0.8em; margin-bottom: 1rem;"></span>
                         </fieldset>
                     </div>
                     <fieldset class="form-group">
@@ -312,7 +317,7 @@
                     </label>
                 </fieldset>
 
-                <div id="section-adress-nl" class="conditional-fields">
+                <div id="sectie-adres-nl" class="conditional-fields">
                     <h3>Adres in Nederland</h3>
 
                     <fieldset class="form-group adress">
@@ -339,7 +344,7 @@
                     </fieldset>
                 </div>
 
-                <div id="section-adress-abroad" class="conditional-fields">
+                <div id="sectie-adres-buitenland" class="conditional-fields">
                     <h3>Adres in het buitenland</h3>
 
                     <fieldset class="form-group adress">
@@ -408,11 +413,254 @@
                         <option value="SWE">Zweden</option>
                     </datalist>
                 </fieldset>
-                <button type="submit">Aangifte versturen</button>
+
+            </fieldset>
+
+
+            <fieldset name="erfenisVerkrijgers" id="verkrijgersContainer">
+                <legend>Erfenis verkrijgers</legend>
+
+                <fieldset class="radio-group">
+                    <legend name="heeftVerkrijger" class="question"> Zijn er verkrijgers voor wie u
+                        <strong>geen</strong> aangifte doet?
+                    </legend>
+                    <label><input type="radio" name="heeftVerkrijger" value="Nee" required> Nee</label>
+                    <label><input type="radio" name="heeftVerkrijger" value="Ja"> Ja</label>
+                </fieldset>
+                <div id="verkrijgersSectie" class="conditional-fields">
+                    <div id="verkrijgersLijst">
+
+                        <fieldset class="verkrijger-item" data-index="1">
+
+                            <legend>Verkrijger 1</legend>
+                            <div class="name-fields">
+                                <label for="voorlettersVerkrijger1">Voorletter(s)</label>
+                                <input type="text" id="voorlettersVerkrijger1" name="voorlettersVerkrijger[]" required>
+
+                                <label for="tussenvoegselVerkrijger1">Tussenvoegsel(s)</label>
+                                <input type="text" id="tussenvoegselVerkrijger1" name="tussenvoegselVerkrijger[]">
+
+                                <label for="achternaamVerkrijger1">Achternaam</label>
+                                <input type="text" id="achternaamVerkrijger1" name="achternaamVerkrijger[]" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="bsnVerkrijger1">BSN verkrijger (optioneel)</label>
+                                <input type="text" id="bsnVerkrijger1" name="bsnVerkrijger[]" pattern="[0-9]{9}">
+                            </div>
+
+                            <fieldset class="radio-group">
+                                <legend name="heeftHeleVermogen" class="question">Krijgt deze verkrijger waarvoor u geen
+                                    aangifte
+                                    doet het hele
+                                    vermogen?</legend>
+
+                                <label>
+                                    <input type="radio" name="heeftHeleVermogen" value="Nee" required>
+                                    Nee
+                                </label>
+
+                                <label>
+                                    <input type="radio" name="heeftHeleVermogen" value="Ja">
+                                    Ja
+                                </label>
+                            </fieldset>
+
+                            <fieldset class="radio-group">
+                                <legend name="heeftWettelijkErfdeel" class="question">
+                                    Doet deze verkrijger een beroep op diens legitieme portie
+                                    (wettelijke erfdeel)?
+                                </legend>
+
+                                <label>
+                                    <input type="radio" name="heeftWettelijkErfdeel" value="Nee" data-required>
+                                    Nee
+                                </label>
+
+                                <label>
+                                    <input type="radio" name="heeftWettelijkErfdeel" value="Ja">
+                                    Ja
+                                </label>
+
+                            </fieldset>
+                        </fieldset>
+
+
+
+
+
+                        <fieldset class="verkrijger-item" data-index="2">
+
+                            <legend>Verkrijger 2</legend>
+                            <div class="name-fields">
+                                <label for="voorlettersVerkrijger2">Voorletter(s)</label>
+                                <input type="text" id="voorlettersVerkrijger2" name="voorlettersVerkrijger[]" required>
+
+                                <label for="tussenvoegselVerkrijger1">Tussenvoegsel(s)</label>
+                                <input type="text" id="tussenvoegselVerkrijger2" name="tussenvoegselVerkrijger[]">
+
+                                <label for="achternaamVerkrijger1">Achternaam</label>
+                                <input type="text" id="achternaamVerkrijger2" name="achternaamVerkrijger[]" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="bsnVerkrijger1">BSN verkrijger (optioneel)</label>
+                                <input type="text" id="bsnVerkrijger2" name="bsnVerkrijger[]" pattern="[0-9]{9}">
+                            </div>
+
+                            <fieldset class="radio-group">
+                                <legend name="heeftHeleVermogen" class="question">Krijgt deze verkrijger waarvoor u geen
+                                    aangifte
+                                    doet het hele
+                                    vermogen?</legend>
+
+                                <label>
+                                    <input type="radio" name="heeftHeleVermogen" value="Nee" required>
+                                    Nee
+                                </label>
+
+                                <label>
+                                    <input type="radio" name="heeftHeleVermogen" value="Ja">
+                                    Ja
+                                </label>
+                            </fieldset>
+
+                            <fieldset class="radio-group">
+                                <legend name="heeftWettelijkErfdeel" class="question">
+                                    Doet deze verkrijger een beroep op diens legitieme portie
+                                    (wettelijke erfdeel)?
+                                </legend>
+
+                                <label>
+                                    <input type="radio" name="heeftWettelijkErfdeel" value="Nee" data-required>
+                                    Nee
+                                </label>
+
+                                <label>
+                                    <input type="radio" name="heeftWettelijkErfdeel" value="Ja">
+                                    Ja
+                                </label>
+
+                            </fieldset>
+                        </fieldset>
+                        <fieldset class="verkrijger-item" data-index="3">
+
+                            <legend>Verkrijger 3</legend>
+                            <div class="name-fields">
+                                <label for="voorlettersVerkrijger3">Voorletter(s)</label>
+                                <input type="text" id="voorlettersVerkrijger3" name="voorlettersVerkrijger[]" required>
+
+                                <label for="tussenvoegselVerkrijger1">Tussenvoegsel(s)</label>
+                                <input type="text" id="tussenvoegselVerkrijger3" name="tussenvoegselVerkrijger[]">
+
+                                <label for="achternaamVerkrijger1">Achternaam</label>
+                                <input type="text" id="achternaamVerkrijger3" name="achternaamVerkrijger[]" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="bsnVerkrijger1">BSN verkrijger (optioneel)</label>
+                                <input type="text" id="bsnVerkrijger3" name="bsnVerkrijger[]" pattern="[0-9]{9}">
+                            </div>
+
+                            <fieldset class="radio-group">
+                                <legend name="heeftHeleVermogen" class="question">Krijgt deze verkrijger waarvoor u geen
+                                    aangifte
+                                    doet het hele
+                                    vermogen?</legend>
+
+                                <label>
+                                    <input type="radio" name="heeftHeleVermogen" value="Nee" required>
+                                    Nee
+                                </label>
+
+                                <label>
+                                    <input type="radio" name="heeftHeleVermogen" value="Ja">
+                                    Ja
+                                </label>
+                            </fieldset>
+
+                            <fieldset class="radio-group">
+                                <legend name="heeftWettelijkErfdeel" class="question">
+                                    Doet deze verkrijger een beroep op diens legitieme portie
+                                    (wettelijke erfdeel)?
+                                </legend>
+
+                                <label>
+                                    <input type="radio" name="heeftWettelijkErfdeel" value="Nee" data-required>
+                                    Nee
+                                </label>
+
+                                <label>
+                                    <input type="radio" name="heeftWettelijkErfdeel" value="Ja">
+                                    Ja
+                                </label>
+
+                            </fieldset>
+                        </fieldset>
+                        <fieldset class="verkrijger-item" data-index="4">
+
+                            <legend>Verkrijger 4</legend>
+                            <div class="name-fields">
+                                <label for="voorlettersVerkrijger4">Voorletter(s)</label>
+                                <input type="text" id="voorlettersVerkrijger4" name="voorlettersVerkrijger[]" required>
+
+                                <label for="tussenvoegselVerkrijger4">Tussenvoegsel(s)</label>
+                                <input type="text" id="tussenvoegselVerkrijger4" name="tussenvoegselVerkrijger[]">
+
+                                <label for="achternaamVerkrijger1">Achternaam</label>
+                                <input type="text" id="achternaamVerkrijger4" name="achternaamVerkrijger[]" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="bsnVerkrijger4">BSN verkrijger (optioneel)</label>
+                                <input type="text" id="bsnVerkrijger4" name="bsnVerkrijger[]" pattern="[0-9]{9}">
+                            </div>
+
+                            <fieldset class="radio-group">
+                                <legend name="heeftHeleVermogen" class="question">Krijgt deze verkrijger waarvoor u geen
+                                    aangifte
+                                    doet het hele
+                                    vermogen?</legend>
+
+                                <label>
+                                    <input type="radio" name="heeftHeleVermogen" value="Nee" required>
+                                    Nee
+                                </label>
+
+                                <label>
+                                    <input type="radio" name="heeftHeleVermogen" value="Ja">
+                                    Ja
+                                </label>
+                            </fieldset>
+
+                            <fieldset class="radio-group">
+                                <legend name="heeftWettelijkErfdeel" class="question">
+                                    Doet deze verkrijger een beroep op diens legitieme portie
+                                    (wettelijke erfdeel)?
+                                </legend>
+
+                                <label>
+                                    <input type="radio" name="heeftWettelijkErfdeel" value="Nee" data-required>
+                                    Nee
+                                </label>
+
+                                <label>
+                                    <input type="radio" name="heeftWettelijkErfdeel" value="Ja">
+                                    Ja
+                                </label>
+
+                            </fieldset>
+                        </fieldset>
+
+                    </div>
+                    <hr>
+
+                    <button type="button" id="addVerkrijgerBtn" class="secondary-button">+ Voeg nog een verkrijger
+                        toe</button>
+                </div>
+            </fieldset>
+
+            <button type="submit" href="overview.html">Aangifte versturen</button>
         </form>
-        
+
     </section>
 </body>
-<script src="script.js"></script>
+    <script src="script.js"></script>
 
 </html>

@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="nl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Overzicht Erfbelasting 2025</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .preview-mode input[readonly] {
+            background-color: #fdfdfd;
+            border-color: #e0e0e0;
+            cursor: pointer;
+            color: var(--ns-font-color);
+        }
+
+        .preview-mode input:not([readonly]) {
+            background-color: #fff;
+            border: 2px solid var(--ns-yellow) !important;
+            outline: none;
+        }
+
+        .edit-hint {
+            display: block;
+            background: #003082;
+            color: white;
+            padding: 8px;
+            border-radius: 8px;
+            font-size: 0.8rem;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .radio-group label.is-selected {
+            border: 3px solid var(--ns-blue) !important;
+            background: rgba(0, 48, 130, 0.1) !important;
+            font-weight: bold;
+        }
+
+        .radio-group label:not(.is-selected) {
+            opacity: 0.5;
+            pointer-events: none;
+        }
+
+        .sticky-footer {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: white;
+            padding: 1.5rem;
+            box-shadow: 0 -5px 20px rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            z-index: 1000;
+        }
+
+        body { padding-bottom: 120px; } 
+    </style>
+</head>
+
+<body class="preview-mode">
+    <strong>Dit is een schoolproject - Overzichtpagina</strong>
+
+    <header>
+        <img src="images/NS-logo-geel.png">
+    </header>
+
+    <h1>Controleer uw gegevens</h1>
+
+    <section>
+
+        <form>
+            <h2>1. Gegevens van de overledene</h2>
+            <fieldset name="Persoongegevens-overledene">
+                <legend>Persoongegevens overledende</legend>
+
+                <fieldset class="form-group name-fields">
+                    <label for="voorlettersOverledene">Voorletter(s)</label>
+                    <input type="text" id="voorlettersOverledene" value="H. J." readonly>
+
+                    <label for="tussenvoegselOverledene">Tussenvoegsel(s)</label>
+                    <input type="text" id="tussenvoegselOverledene" value="de" readonly>
+
+                    <label for="achternaamOverledene">Achternaam</label>
+                    <input type="text" id="achternaamOverledene" value="Vries" readonly>
+                </fieldset>
+
+                <div class="input-field-container">
+                    <fieldset class="form-group">
+                        <label for="BSNoverledende">BSN overledene</label>
+                        <input type="text" id="BSNoverledende" value="123456782" readonly>
+                    </fieldset>
+                    <fieldset class="form-group">
+                        <label for="overlijd">Overlijdensdatum</label>
+                        <input type="date" id="overlijd" value="2025-01-20" readonly>
+                    </fieldset>
+                </div>
+            </fieldset>
+
+            <fieldset name="Partner-overledene">
+                <legend>Partner overledene</legend>
+                <fieldset class="radio-group">
+                    <legend class="question">Was de overledene getrouwd?</legend>
+                    <label>Nee</label>
+                    <label class="is-selected">Ja</label>
+                </fieldset>
+
+                <fieldset class="radio-group" style="display: grid;">
+                    <legend class="question">Huwelijkse voorwaarden in notariële akte?</legend>
+                    <label class="is-selected">Nee</label>
+                    <label>Ja</label>
+                </fieldset>
+            </fieldset>
+
+            <fieldset name="Nabestaanden">
+                <legend>Nabestaanden</legend>
+                <fieldset class="radio-group">
+                    <legend class="question">Had de overledene kinderen?</legend>
+                    <label>Nee</label>
+                    <label class="is-selected">Ja</label>
+                </fieldset>
+            </fieldset>
+
+            <h2> 2. Gegevens gemachtigde</h2>
+            <fieldset name="Persoongegevens-gemachtigde">
+                <legend>Persoongegevens gemachtigde</legend>
+                <fieldset class="form-group name-fields">
+                    <label for="voorlettersGemachtigde">Voorletter(s)</label>
+                    <input type="text" id="voorlettersGemachtigde" value="L. P." readonly>
+
+                    <label for="achternaamGemachtigde">Achternaam</label>
+                    <input type="text" id="achternaamGemachtigde" value="Bakker" readonly>
+                </fieldset>
+
+                <div id="contact-info">
+                    <fieldset class="form-group">
+                        <label for="emailGemachtigde">E-mailadres</label>
+                        <input type="email" id="emailGemachtigde" value="l.bakker@email.nl" readonly>
+                    </fieldset>
+                    <fieldset class="form-group">
+                        <label for="telefoonnummerGemachtigde">Telefoonnummer</label>
+                        <input type="tel" id="telefoonnummerGemachtigde" value="0687654321" readonly>
+                    </fieldset>
+                </div>
+
+                <div id="sectie-adres-nl" style="display: grid;">
+                    <fieldset class="form-group adress">
+                        <label for="straatGemachtigdeNL">Straat</label>
+                        <input type="text" id="straatGemachtigdeNL" value="Hoofdstraat" readonly>
+
+                        <label for="huisnummerGemachtigdeNL">Huisnummer</label>
+                        <input type="text" id="huisnummerGemachtigdeNL" value="42" readonly>
+                    </fieldset>
+                    <fieldset class="form-group zipcode">
+                        <label for="postcodeGemachtigdeNL">Postcode</label>
+                        <input type="text" id="postcodeGemachtigdeNL" value="1011 AB" readonly>
+
+                        <label for="woonplaatsGemachtigdeNL">Plaats</label>
+                        <input type="text" id="woonplaatsGemachtigdeNL" value="AMSTERDAM" readonly>
+                    </fieldset>
+                </div>
+            </fieldset>
+        </form>
+    </section>
+
+    <div class="sticky-footer">
+        <button type="button" onclick="window.history.back()" style="background: white; color: var(--ns-blue); border: 1px solid var(--ns-blue); box-shadow: none; max-width: 200px; margin: 0;">Terug</button>
+        <button type="button" onclick="verstuurAangifte()" style="max-width: 300px; margin: 0;">Definitief versturen</button>
+    </div>
+
+    <script>
+        // JS voor directe bewerking
+        document.querySelectorAll('input[readonly]').forEach(input => {
+            input.addEventListener('click', function () {
+                this.readOnly = false;
+                this.focus();
+            });
+
+            input.addEventListener('blur', function () {
+                this.readOnly = true;
+            });
+        });
+
+        function verstuurAangifte() {
+            alert('Aangifte succesvol verzonden naar de Belastingdienst!');
+            window.location.href = 'index.html';
+        }
+    </script>
+</body>
+
+</html>

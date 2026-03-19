@@ -7,9 +7,11 @@
     --border-grey: #d8dee6;
 }
 
-/* *,*::before, *::after {
+*,
+*::before,
+*::after {
     box-sizing: border-box;
-} */
+}
 
 input,
 button,
@@ -17,16 +19,33 @@ select {
     margin: 0;
 }
 
-/* Error handling */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* *MARK: Error handling */
 input:user-invalid {
     background-color: rgba(238, 161, 161, 0.2);
-    border: rgb(255, 89, 89) solid 1px;
+    border: rgb(255, 165, 165) solid 1px;
 }
 
 input:not(:required) {
     border: 1px solid var(--border-grey);
     background-color: white;
 }
+
 input[required]:focus,
 input[required]:not(:placeholder-shown) {
     transition: border-color 0.2s, background-image 0.2s;
@@ -43,6 +62,7 @@ input[required]:not(:placeholder-shown):valid {
 
 input[required]:focus:invalid {
     border-color: #f39c12;
+    background-color: white;
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23f39c12'%3E%3Cpath d='M11 15h2v2h-2zm0-8h2v6h-2zm.99-5C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z'/%3E%3C/svg%3E");
     background-repeat: no-repeat;
     background-position: center right 0.8rem;
@@ -76,16 +96,16 @@ fieldset[name="Persoongegevens-notaris"]:has(input[name="heeftTestament"][value=
     pointer-events: none;
 }
 
-/* De styling voor wanneer een veld gedeactiveerd is */
+/* De styling gedeactiveerd  */
 .exclusive-input:disabled {
     opacity: 0.4;
     /* cursor: not-allowed; */
     transition: opacity 0.3s ease;
 }
 
-/* De basis-stijl voor de fieldsets */
+/* De basis-stijl fieldsets */
 fieldset[name] {
-    position: relative; /* Nodig om het vinkje te positioneren */
+    position: relative;
     transition: border-color 0.4s ease;
 }
 
@@ -107,37 +127,75 @@ fieldset[name]:not([name="PersoongegevensNotaris"]).is-complete::after {
     background-position: center;
     border-radius: 50%;
     border: 2px solid white;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+
     animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+fieldset[name].is-complete {
+    border-color: #66ca7d;
 }
 
 
 @keyframes popIn {
-    0% { transform: scale(0) rotate(-20deg); opacity: 0; }
-    100% { transform: scale(1) rotate(0deg); opacity: 1; }
+    0% {
+        transform: scale(0) rotate(-20deg);
+        opacity: 0;
+    }
+
+    100% {
+        transform: scale(1) rotate(0deg);
+        opacity: 1;
+    }
 }
 
-/* De foutmelding styling  */
+/* foutmelding styling  */
 .radio-group.invalid-radio {
-    border: 1px solid #d93025;
+    border: 1px solid #da574d;
     padding: 10px;
     background-color: #fff8f8;
     animation: shake 0.2s ease-in-out;
 }
 
-/* General styling /////////////////////////////////////////////////////////////////*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* *MARK: General styling*/
 body {
     font-family: system-ui, -apple-system, sans-serif;
     background-color: var(--light-grey);
     color: var(--ns-blue);
     margin: 0;
-
 }
 
 
 header {
     background-color: var(--ns-yellow);
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    z-index: 5;
+    top: 0;
+}
+
+
+#printBtn {
+    max-height: 40px;
+    margin: 1%;
+
 }
 
 header>img {
@@ -154,7 +212,17 @@ h1 {
 section {
     padding: 1.5rem;
 }
-/* Form styling /////////////////////////////////////////////////////////////// */
+
+
+
+
+
+
+
+
+
+
+/* *MARK: Form styling  */
 form>fieldset {
     position: relative;
     border-radius: 14px;
@@ -278,7 +346,11 @@ h2 {
     margin-bottom: 1rem;
     border-left: 4px solid var(--ns-yellow);
     padding-left: 0.8rem;
+}
+
+h2:not(:first-child) {
     margin-top: 4rem;
+
 }
 
 em {
@@ -289,7 +361,7 @@ em {
 }
 
 legend {
-    font-weight: 800;
+    font-weight: 0;
     padding: 0.5rem;
     border-radius: 4px;
 }
@@ -382,6 +454,7 @@ fieldset[name="Persoongegevens-overledene"] {
     }
 
 }
+
 .protocol {
     display: grid;
 
@@ -393,7 +466,7 @@ fieldset[name="Persoongegevens-overledene"] {
 
 }
 
-#contact-info{
+#contact-info {
     display: grid;
 
     @media (min-width: 720px) {
@@ -411,25 +484,39 @@ fieldset[name="Persoongegevens-overledene"] {
     display: grid;
 
 }
-/* Standaard zijn velden zichtbaar voor als JS uitstaat */
+
+
+
+
+
+
+
+/* *MARK: JS-enabled */
+/* velden zichtbaar als JS uitstaat */
 .conditional-fields {
-    display: grid; 
-    transition: opacity 0.3s ease;
+    display: grid;
 }
 
-/* Alleen als JavaScript actief is (we voegen straks een class 'js-enabled' toe), 
-   mogen de velden verborgen worden */
+/* als JS actief, velden verborgen */
 .js-enabled .conditional-fields {
     display: none;
 }
 
-/* Als JS aanstaat EN de sectie moet zichtbaar zijn */
+/* Als JS EN de sectie moet zichtbaar */
 .js-enabled .conditional-fields.is-visible {
     display: grid;
 }
 
+#addVerkrijgerBtn {
+    display: none;
+}
+
+.js-enabled #addVerkrijgerBtn {
+    display: inline-block;
+}
+
 .conditional-fields h3 {
-    order: -1; 
+    order: -1;
     width: 100%;
     margin-bottom: 1rem;
 }
@@ -437,14 +524,31 @@ fieldset[name="Persoongegevens-overledene"] {
 
 /* Een klasse om ze via JS te tonen */
 .is-visible {
-    display: grid; 
+    display: grid;
 }
 
 /* Voeg een sterretje toe aan labels van verplichte velden */
 label:has(+ input[required])::after {
     content: " *";
 }
-/* Responsive Layout voor grotere schermen */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* *MARK: Responsive Layout voor grotere schermen */
 @media (min-width: 720px) {
 
 
@@ -456,7 +560,8 @@ label:has(+ input[required])::after {
 
     .name-fields input,
     .adress input,
-    .zipcode input, .protocol input {
+    .zipcode input,
+    .protocol input {
         grid-row: 2;
         width: 100%;
         box-sizing: border-box;
@@ -490,3 +595,381 @@ label:has(+ input[required])::after {
     }
 
 }
+
+
+
+
+
+.secondary-button {
+    background: white;
+    color: var(--ns-blue);
+    border: 2px solid var(--ns-blue);
+    padding: 0.6rem 1rem;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+
+
+}
+
+.secondary-button:hover {
+    background-color: var(--ns-blue);
+    color: white;
+}
+
+
+.verkrijger-item {
+    border: solid 2px var(--ns-blue);
+    box-shadow: 5px 5px 5px 1px #ebebeb;
+    margin-bottom: 2rem;
+    position: relative;
+    padding-top: 2rem;
+}
+
+
+
+
+/* De verwijderknop */
+.remove-verkrijger {
+    position: absolute;
+    top: -6%;
+    right: -2%;
+    background: white;
+    color: #e74c3c;
+    border: 2px solid #e74c3c;
+    padding: 0.3rem 0.6rem;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 600;
+    transition: all 0.2s ease;
+}
+
+.remove-verkrijger:hover {
+    background: #e74c3c;
+    color: white;
+}
+
+#sectie-adres-nl,
+#sectie-adres-buitenland,
+#verkrijgersLijst {
+    display: none;
+}
+
+
+body:has(input[name="locatieGemachtigde"][value="NL"]:checked) #sectie-adres-nl {
+    display: grid;
+}
+
+body:has(input[name="locatieGemachtigde"][value="Buitenland"]:checked) #sectie-adres-buitenland {
+    display: grid;
+}
+
+body:has(input[name="heeftVerkrijger"][value="Ja"]:checked) #verkrijgersLijst {
+    display: grid;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* *MARK: Printscreen   */
+@media print {
+
+    /* Verberg elementen  */
+
+    #addVerkrijgerBtn,
+    .remove-verkrijger,
+    button[type="submit"],
+    header {
+        display: none !important;
+    }
+
+    body,
+    legend {
+        background-color: white !important;
+        color: black !important;
+    }
+
+
+
+    form>fieldset {
+        border: 1px solid #ccc !important;
+        background: white !important;
+        box-shadow: none !important;
+        margin-bottom: 20px !important;
+        break-inside: avoid;
+
+    }
+
+
+
+    form>fieldset::before {
+        display: none !important;
+    }
+
+    h2 {
+        color: black !important;
+        border-left: 4px solid black !important;
+
+    }
+
+
+
+
+
+    input {
+        border: 1px solid var(--border-grey) !important;
+        border-radius: 5px !important;
+        padding: 5px 0 !important;
+    }
+
+
+
+    .radio-group label:has(input:checked) {
+        border: 1px solid black !important;
+        background: #f0f0f0 !important;
+        font-weight: bold;
+    }
+
+}
+
+@media print {
+
+    .name-fields,
+    .protocol,
+    #contact-info,
+    .input-field-container,
+    .radio-group {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 0.5rem !important;
+    }
+
+    .adress,
+    .zipcode {
+        display: grid !important;
+        grid-template-columns: 3fr 1fr 1fr !important;
+        gap: 1rem !important;
+    }
+
+    .radio-group label::before {
+        content: "" !important;
+        /* Altijd leeg vakje voor de pen */
+        display: inline-block;
+        width: 16px;
+        height: 16px;
+        margin-right: 10px;
+        background: white !important;
+        border: none;
+    }
+
+    input[name="locatieGemachtigde"]+label::before,
+    input[name="heeftPartner"]+label::before,
+    input[name="heeftVerkrijger"]+label::before {
+        content: "" !important;
+    }
+
+    .conditional-fields,
+    #sectie-adres-nl,
+    #sectie-adres-buitenland,
+    #verkrijgersSectie,
+    #verkrijgersLijst {
+        display: block !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        pointer-events: auto !important;
+    }
+
+    .secondary-button,
+    .remove-verkrijger,
+    button[type="submit"],
+    header,
+    .is-complete::after {
+        display: none !important;
+    }
+
+
+    #addVerkrijgerBtn,
+    .remove-verkrijger,
+    button[type="submit"],
+    #printBtn,
+    header,
+    .is-complete::after {
+        display: none !important;
+    }
+
+    .radio-group {
+        display: block !important;
+    }
+
+    .radio-group label {
+        border: none !important;
+        background: none !important;
+        text-align: left !important;
+        padding: 5px 0 !important;
+        display: flex !important;
+        align-items: center;
+    }
+
+    .radio-group label::before {
+        content: "";
+        display: inline-block;
+        width: 14px;
+        height: 14px;
+        border: 1px solid black !important;
+        margin-right: 10px;
+        border-radius: 2px;
+    }
+
+
+
+    #verkrijgersLijst {
+        display: block !important;
+    }
+
+    .verkrijger-item {
+        display: block !important;
+        opacity: 1 !important;
+        margin-bottom: 2rem !important;
+        border: 1px solid black !important;
+        padding: 1rem !important;
+        /* break-inside: avoid; */
+    }
+
+
+    /* Pagina-instellingen */
+    @page {
+        margin: 0.5cm 1cm;
+        size: A4;
+    }
+
+    body {
+        background-color: white !important;
+        color: #000 !important;
+        font-size: 9pt; 
+        line-height: 1.1;
+    }
+
+    /* Verberg knoppen*/
+    header, button, #addVerkrijgerBtn, .remove-verkrijger, .is-complete::after {
+        display: none !important;
+    }
+
+    /* Hoofdsecties  */
+    h2 {
+        font-size: 12pt;
+        background-color: #eef2f6 !important;
+        color: black !important;
+        padding: 4px;
+        border-bottom: 1pt solid black !important;
+        margin-top: 15px !important;
+        -webkit-print-color-adjust: exact;
+    }
+
+    /* De tweekoloms-lay-out  */
+    fieldset[name] {
+        border: none !important;
+        padding: 0 !important;
+        margin-bottom: 10px !important;
+    }
+
+    .form-group, .input-field-container, .name-fields, .zipcode, .protocol {
+        display: grid !important;
+        grid-template-columns: 45% 55% !important; 
+        align-items: start !important;
+        gap: 5px !important;
+        margin-bottom: 8px !important;
+        border-bottom: 0.5pt solid #eee !important; 
+        padding-bottom: 4px !important;
+    }
+
+    label, .question {
+        grid-column: 1 !important;
+        font-weight: normal !important;
+        padding-right: 10px !important;
+    }
+
+    input, .radio-group {
+        grid-column: 2 !important;
+        width: 100% !important;
+        margin: 0 !important;
+    }
+
+    input[type="text"],
+    input[type="number"],
+    input[type="date"],
+    input[type="email"],
+    input[type="tel"] {
+        border: none !important;
+        border-bottom: 1pt solid #000 !important;
+        background-color: #f9f9f9 !important;
+        padding: 2px 5px !important;
+        width: 100%;
+        margin-bottom: 10px !important;
+        -webkit-print-color-adjust: exact;
+    }
+
+    .radio-group {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 2px !important;
+    }
+
+    .radio-group label {
+        display: flex !important;
+        align-items: center !important;
+        padding: 0 !important;
+    }
+
+    
+
+
+
+    
+    .name-fields {
+        grid-template-columns: 45% 55% !important;
+    }
+
+    /* Forceer alles zichtbaar */
+    .conditional-fields, #sectie-adres-nl, #sectie-adres-buitenland, #verkrijgersLijst {
+        display: block !important;
+        visibility: visible !important;
+    }
+     section {
+        max-width: 98% !important;
+        width: 100% !important;
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+
+    form {
+        width: 100% !important;
+    }
+}
+
+   
+
+
