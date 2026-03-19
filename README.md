@@ -23,11 +23,11 @@ Behaald: NS-styling geïmplementeerd met CSS-variabelen. Interactieve radio-butt
 
 Bronnen:
 
-MDN – CSS :has()
+MDN – CSS :has(): https://developer.mozilla.org/en-US/docs/Web/CSS/:has
 
-MDN – HTML form validation
+MDN – HTML form validation: https://developer.mozilla.org/en-US/docs/Learn/Forms/Form_validation
 
-MDN – :user-invalid pseudo-class
+MDN – :user-invalid pseudo-class: https://developer.mozilla.org/en-US/docs/Web/CSS/:user-invalid
 
 ## Woensdag 24/02
 Doel: Het formulier responsive maken met grid en dynamisch maken met progressive disclosure en validatiefouten door middel van Javascript.
@@ -88,13 +88,13 @@ Conclusie: Het dynamisch verplicht maken van radio buttons via JavaScript is com
 
 ### Bronnen:
 
-MDN - Constraint validation API
+MDN - Constraint validation API: https://developer.mozilla.org/en-US/docs/Web/API/Constraint_validation
 
 Gemini AI: prompt: hoe maak je input values automisch hoofdletters met js?
 
-StackOverflow - HTML5 validation 'An invalid form control is not focusable'
+StackOverflow - HTML5 validation 'An invalid form control is not focusable': https://stackoverflow.com/questions/22148080/an-invalid-form-control-with-name-is-not-focusable
 
-JavaScript.info - Forms: event and method submit
+JavaScript.info - Forms: event and method submit: https://javascript.info/forms-submit
 
 
 Technische uitdagingen & Leerpunten:
